@@ -1,0 +1,155 @@
+/* Navbar Header */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+.navbar {
+  &__header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 10vh;
+    background: none;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  &__header.scrolled {
+    background: #151515;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  &__container {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__section {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__left {
+    width: 30%;
+    justify-content: flex-start;
+    gap: 2vw;
+    padding-left: 3vw;
+    opacity: 0;
+  }
+
+  &__left.scrolled {
+    opacity: 1;
+  }
+
+  &__center {
+    width: 40%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__right {
+    width: 30%;
+    justify-content: flex-end;
+    gap: 2vw;
+    padding-right: 3vw;
+    opacity: 0;
+  }
+
+  &__right.scrolled {
+    opacity: 1;
+  }
+
+  &__section a {
+    text-decoration: none;
+    color: #ffcc00;
+    font-weight: bold;
+    font-size: 1.1vw;
+    letter-spacing: 0.05vw;
+    transition: color 0.2s;
+  }
+
+  &__section a.cart {
+    font-weight: bold;
+  }
+}
+
+.logo {
+  transition: width 0.3s, height 0.3s;
+  width: 20vw;
+  height: 20vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+
+  &.shrink {
+    width: 15vw;
+    height: 15vw;
+  }
+
+  &.shrink img {
+    width: 100%;
+    height: auto;
+  }
+
+  &-text {
+    margin-top: 0.2vh;
+  }
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+  transition: width 0.3s, height 0.3s;
+}
+
+.brand {
+  display: block;
+  font-size: 2.5vw;
+  font-weight: bold;
+  letter-spacing: 0.1vw;
+}
+
+.subtitle {
+  display: block;
+  font-size: 1vw;
+  color: #222;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .navbar__header,
+  .navbar__container {
+    height: 6vh;
+  }
+
+  .brand {
+    font-size: 4vw;
+  }
+
+  .subtitle {
+    font-size: 2vw;
+  }
+
+  .logo {
+    width: 10vw;
+    height: 10vw;
+
+    &.shrink {
+      width: 6vw;
+      height: 6vw;
+    }
+  }
+}
