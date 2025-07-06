@@ -3,34 +3,27 @@ import PrimaryButton from "../../../components/button/primarybutton/PrimaryButto
 import SecondaryButton from "../../../components/button/secondarybutton/SecondaryButton";
 import RotatingCard from "../../../components/card/rotatingcard/RotatingCard";
 import HoverCard from "../../../components/card/hovercard/HoverCard";
-import TestButton from "../../../components/button/testbutton/TestButton";
 import PricingCard from "../../../components/card/pricingcard/PricingCard";
 
 const HeroSection = () => {
   return (
     <div
       className="hero-section-container flex flex-col items-center justify-center"
-      style={{ marginTop: "100px" }}
+      style={{ marginTop: "200px" }}
     >
-      <h1>this is the hero section</h1>
-      <div className="hero-section-buttons flex flex-col gap-4">
+      <div className="hero-section-buttons flex gap-10 justify-center items-center">
         <PrimaryButton />
         <SecondaryButton />
-        <TestButton />
       </div>
-      <div className="rotating-card-container">
+      {/* <div className="rotating-card-container flex justify-center items-center">
         <RotatingCard />
-      </div>
-      <div className="hover-card-container flex gap-10">
-        <div className="hover-card-container-first">
+        <div className="hover-card-container flex gap-1">
           <HoverCard
             firstContent="Front"
             secondContent="Back"
             color1="43, 26, 71" // deep purple
             color2="160, 132, 232" // accent purple
           />
-        </div>
-        <div className="hover-card-container-second">
           <HoverCard
             firstContent="Hello"
             secondContent="World"
@@ -38,9 +31,29 @@ const HeroSection = () => {
             color2="212, 175, 55" // gold accent
           />
         </div>
-        <div className="pricing-card-container">
-          <PricingCard />
+      </div> */}
+      <div className="rotating-card-container flex justify-center items-center">
+        <RotatingCard />
+        <div className="hover-card-container flex gap-7">
+          <HoverCard
+            firstContent="First"
+            secondContent="Third"
+            color1="43, 26, 71" // deep purple
+            color2="160, 132, 232" // accent purple
+          />
+          <HoverCard
+            firstContent="Second"
+            secondContent="Fourth"
+            color1="68, 71, 75" // graphite
+            color2="212, 175, 55" // gold accent
+          />
+          x
         </div>
+      </div>
+      <div className="pricing-card-container flex justify-center items-center gap-10 ">
+        <PricingCard />
+        <PricingCard />
+        <PricingCard />
       </div>
     </div>
   );

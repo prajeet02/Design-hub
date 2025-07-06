@@ -8,5 +8,4 @@ const SecondaryButton = () => {
     </div>
   );
 };
-
 export default SecondaryButton;
