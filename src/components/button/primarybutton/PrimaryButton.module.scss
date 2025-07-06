@@ -1,0 +1,12 @@
+.button--primary {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    box-shadow: 0 2px 10px rgba(255, 62, 129, 0.2);
+  
+    &:hover {
+      background-color: var(--primary-bg-hover);
+      transform: scale(1.02);
+      box-shadow: 0 4px 16px rgba(255, 62, 129, 0.25);
+    }
+  }
+  

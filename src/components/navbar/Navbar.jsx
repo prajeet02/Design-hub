@@ -7,7 +7,6 @@ const Navbar = () => {
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
-    console.log("Scroll position:", scrollPosition); // Debug log
     setIsScrolled(scrollPosition > 20);
   };
 

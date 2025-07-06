@@ -1,0 +1,12 @@
+.button--secondary {
+    background-color: var(--secondary-bg);
+    color: var(--secondary-text);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  
+    &:hover {
+      background-color: var(--secondary-bg-hover);
+      transform: scale(1.02);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+  

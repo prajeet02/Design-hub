@@ -1,0 +1,100 @@
+.card {
+  position: relative;
+  max-width: 320px;
+  padding: 2rem;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, #2b1a47 0%, #1b1c36 100%);
+  border: 1.5px solid #4b357a;
+  box-shadow: 0 10px 40px rgba(108, 70, 196, 0.3);
+  transition: transform 0.3s;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5rem;
+  height: 5rem;
+  .ribbon-inner {
+    position: absolute;
+    right: -40px;
+    top: 36px;
+    width: 160px;
+    background: #d4af37;
+    color: #232447;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.25rem 0;
+    text-align: center;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.18);
+    transform: rotate(45deg);
+    z-index: 2;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 1.5rem;
+}
+
+.heading {
+  color: #d4af37;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.price {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  .per {
+    color: #c9b6ff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-left: 0.25rem;
+  }
+}
+
+.desc {
+  color: #d8d2f2;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.cta {
+  margin-top: 1.5rem;
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 3rem;
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #6d4bd4 0%, #a084e8 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(108, 70, 196, 0.18);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    &:hover, &:focus {
+      background: linear-gradient(90deg, #d4af37 0%, #a084e8 100%);
+      color: #232447;
+      box-shadow: 0 6px 24px rgba(212, 175, 55, 0.18);
+      outline: none;
+    }
+  }
+}
