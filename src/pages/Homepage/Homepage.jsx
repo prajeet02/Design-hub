@@ -1,20 +1,12 @@
 import React from 'react';
+import Navbar from '../../components/navbar/Navbar';
+import Footer from '../../components/footer/footer';
+import './Homepage.module.scss';
+import PerformerSection from '../../features/Homepage/performerSection/PerformerSection';
 
-import './App.css';
-import Homepage from './pages/Homepage/Homepage';
-
-import Navbar from './components/navbar/navbar';
-import './App.css';
-
-
-
-
-function App() {
+function Homepage() {
   return (
     <>
-
-      <Homepage/>
-
       <div className=''>
        <Navbar/>
        <div className="content">
@@ -24,10 +16,11 @@ function App() {
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       </div>
+      <PerformerSection/>
+      <Footer/>
       </div>
-
     </>
   );
 }
  
-export default App;
+export default Homepage;

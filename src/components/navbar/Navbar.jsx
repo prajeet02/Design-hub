@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import styles from './Navbar.module.scss';
 import DesireHubLogo from '../../assets/images/Desirehublogo.png';
@@ -45,13 +44,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-=======
-import React from 'react'
-
-const navbar = () => {
-  return (
-    <div>navbar</div>
-  )
-}
-
-export default navbar
