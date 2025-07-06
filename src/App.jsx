@@ -1,33 +1,21 @@
-import React from 'react';
+import React from "react";
 
-import './App.css';
-import Homepage from './pages/Homepage/Homepage';
+import "./App.css";
+import Homepage from "./pages/Homepage/Homepage";
 
-import Navbar from './components/navbar/navbar';
-import './App.css';
-
-
-
+import Navbar from "./components/navbar/Navbar";
+import "./App.css";
 
 function App() {
   return (
     <>
+      <Homepage />
 
-      <Homepage/>
-
-      <div className=''>
-       <Navbar/>
-       <div className="content">
-        <h1>Welcome to the Website</h1>
-        <p>Scroll down to see the logo shrink and navbar appear.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <div className="">
+        <Navbar />
       </div>
-      </div>
-
     </>
   );
 }
- 
+
 export default App;
