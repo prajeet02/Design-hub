@@ -1,13 +1,14 @@
 import Navbar from "./components/navbar/Navbar";
 import "./App.css";
-import HeroSection from "./features/home/herosection/HeroSection";
-import Homepage from "./pages/Homepage/Homepage";
+import Home from "./pages/home/Home";
+import Footer from "./components/footer/footer";
 
 function App() {
   return (
     <>
-      <HeroSection />
-      <Homepage />
+      <Navbar />
+      <Home />
+      <Footer />
     </>
   );
 }
