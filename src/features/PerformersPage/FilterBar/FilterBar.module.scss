@@ -1,0 +1,279 @@
+.filterBar {
+  background: rgba(30, 30, 35, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  padding: 24px;
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.4);
+  height: 160vh;
+  position:absolute;
+  top: 15vh;
+  left: 0;
+  width: 300px;
+  overflow-y: auto;
+  z-index: 999;
+  border-radius: 10px;
+
+  .filterHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .headerButtons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .clearButton {
+      background: none;
+      border: none;
+      color: #ff3e81;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: rgba(255, 62, 129, 0.1);
+        color: #ff5b95;
+      }
+    }
+
+    .closeButton {
+      display: none; // Hidden by default
+      background: none;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ff3e81;
+      }
+
+      @media (max-width: 768px) {
+        display: flex; // Show on mobile
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  .filterSection {
+    margin-bottom: 24px;
+
+    h4 {
+      margin: 0 0 12px 0;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .checkboxGroup,
+    .radioGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .checkboxLabel,
+    .radioLabel {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: #d1d5db;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #ffffff;
+      }
+
+      input[type="checkbox"],
+      input[type="radio"] {
+        display: none;
+      }
+
+      .checkmark,
+      .radiomark {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #d1d5db;
+        margin-right: 8px;
+        transition: all 0.2s ease;
+        position: relative;
+      }
+
+      .checkmark {
+        border-radius: 3px;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 4px;
+          top: 1px;
+          width: 4px;
+          height: 8px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+          opacity: 0;
+          transition: opacity 0.2s ease;
+        }
+      }
+
+      .radiomark {
+        border-radius: 50%;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: white;
+          opacity: 0;
+          transition: opacity 0.2s ease;
+        }
+      }
+
+      input[type="checkbox"]:checked+.checkmark,
+      input[type="radio"]:checked+.radiomark {
+        background: #ff3e81;
+        border-color: #ff3e81;
+
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
+
+    .priceRange {
+      .priceInputs {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-direction: column;
+        margin-bottom: 16px;
+        color:white;
+
+        span {
+          color: #6b7280;
+          font-weight: 500;
+        }
+
+        .priceInput {
+          flex: 1;
+          padding: 8px 12px;
+          border: 1px solid #d1d5db;
+          border-radius: 6px;
+          font-size: 0.875rem;
+          transition: border-color 0.2s ease;
+
+          &:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+          }
+        }
+      }
+
+      .rangeSlider {
+        position: relative;
+        height: 20px;
+
+        .slider {
+          position: absolute;
+          width: 100%;
+          height: 4px;
+          border-radius: 2px;
+          background: #e5e7eb;
+          outline: none;
+          appearance: none;
+          cursor: pointer;
+
+          &::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #6366f1;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+
+          &::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #6366f1;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .filterBar {
+    width: 280px; // Slightly smaller on medium screens
+  }
+}
+
+@media (max-width: 768px) {
+  .filterBar {
+    position: fixed;
+    top: 0;
+    left: -300px; // Hide sidebar off-screen by default
+    width: 300px;
+    height: 100vh;
+    transition: left 0.3s ease;
+    z-index: 1001;
+
+    .filterHeader {
+      margin-top: 80px; // Adjust for mobile navbar
+    }
+  }
+
+  .filterBar.open {
+    left: 0; // Show sidebar when open
+  }
+
+  // Add overlay for mobile when sidebar is open
+  .filterBar.open::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 300px;
+    width: calc(100vw - 300px);
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+}

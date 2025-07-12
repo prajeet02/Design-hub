@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router";
 import styles from "./Navbar.module.scss";
 import DesireHubLogo from "../../assets/images/Desirehublogo.png";
 
@@ -28,30 +29,31 @@ const Navbar = () => {
             isScrolled ? ` ${styles.scrolled}` : ""
           }`}
         >
-          <a href="#shop">PERFORMERS PAGE</a>
+          <Link to="/performers">PERFORMERS PAGE</Link>
           <a href="#commercial">VIP</a>
-          <a href="#commercial">LOGIN</a>
+          <Link to="/login">LOGIN</Link>
         </div>
         <div className={`${styles.navbar__section} ${styles.navbar__center}`}>
-          <div
-            className={`${styles.logo}${isScrolled ? ` ${styles.shrink}` : ""}`}
-          >
-            <img src={DesireHubLogo} alt="Logo" />
-          </div>
-          <div className={styles["logo-text"]}>
-            <span className={styles.brand}></span>
-            <span className={styles.subtitle}></span>
-          </div>
+          <Link to="/home">
+            <div
+              className={`${styles.logo}${isScrolled ? ` ${styles.shrink}` : ""}`}
+            >
+              <img src={DesireHubLogo} alt="Logo" />
+            </div>
+            <div className={styles["logo-text"]}>
+              <span className={styles.brand}></span>
+              <span className={styles.subtitle}></span>
+            </div>
+          </Link>
         </div>
         <div
           className={`${styles.navbar__section} ${styles.navbar__right}${
             isScrolled ? ` ${styles.scrolled}` : ""
           }`}
         >
-          <a href="#warranty">ABOUT</a>
+          <Link to="/about">ABOUT US</Link>
         </div>
       </div>
-      <div style={{ height: "200vh", background: "#eee" }}></div>
     </header>
   );
 };
