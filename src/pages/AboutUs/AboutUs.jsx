@@ -2,6 +2,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router";
 import styles from "./AboutUs.module.scss";
+import Footer from "../../components/footer/Footer";
 
 const AboutUs = () => {
   const location = useLocation();
@@ -34,7 +35,7 @@ const AboutUs = () => {
 
   return (
     <div className={styles.aboutUsContainer}>
-      <Navbar />
+      {/* <Navbar /> */}
 
       {/* Quick navigation */}
       <div className={styles.quickNav}>
@@ -98,6 +99,9 @@ const AboutUs = () => {
           </div>
         </section>
       </main>
+      <div className={styles["footer-wrapper"]}>
+        <Footer />
+      </div>
     </div>
   );
 };

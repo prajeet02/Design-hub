@@ -5,7 +5,6 @@ import "./App.css";
 import Home from "./pages/home/Home";
 import Performers from "./pages/performers/Performers";
 import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/footer/footer";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import AboutUs from "./pages/aboutus/AboutUs";
@@ -22,7 +21,6 @@ function App() {
           <Route exact path="/aboutus" element={<AboutUs />} />
           <Route exact path="/performers" element={<Performers />} />
         </Routes>
-        <Footer />
       </div>
     </Router>
   );
