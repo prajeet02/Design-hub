@@ -3,8 +3,8 @@ import styles from "./PrimaryButton.module.scss";
 
 const PrimaryButton = () => {
   return (
-    <div>
-      <button className={styles.button}>Primary Button</button>
+    <div className={styles.primaryButton}>
+      <button>Primary Button</button>
     </div>
   );
 };
