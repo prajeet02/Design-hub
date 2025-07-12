@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router';
-import styles from './Signup.module.scss';
-import DesireHubLogo from '../../assets/images/Desirehublogo.png';
+import React, { useState } from "react";
+import { Link } from "react-router";
+import styles from "./Signup.module.scss";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -18,80 +17,79 @@ const Signup = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ''
+        [name]: "",
       }));
     }
   };
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.firstName.trim()) {
-      newErrors.firstName = 'First name is required';
+      newErrors.firstName = "First name is required";
     }
-    
+
     if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Last name is required';
+      newErrors.lastName = "Last name is required";
     }
-    
+
     if (!formData.username.trim()) {
-      newErrors.username = 'Username is required';
+      newErrors.username = "Username is required";
     } else if (formData.username.length < 3) {
-      newErrors.username = 'Username must be at least 3 characters long';
+      newErrors.username = "Username must be at least 3 characters long";
     }
-    
+
     if (!formData.email) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = "Please enter a valid email address";
     }
-    
+
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Password is required";
     } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters long';
+      newErrors.password = "Password must be at least 8 characters long";
     }
-    
+
     if (!formData.confirmPassword) {
-      newErrors.confirmPassword = 'Please confirm your password';
+      newErrors.confirmPassword = "Please confirm your password";
     } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
+      newErrors.confirmPassword = "Passwords do not match";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
-    
+
     setIsLoading(true);
-    
+
     try {
       // TODO: Implement backend registration
-      console.log('Signup attempt:', formData);
-      
+      console.log("Signup attempt:", formData);
+
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // For now, just show success message
-      alert('Signup functionality will be implemented with backend!');
-      
+      alert("Signup functionality will be implemented with backend!");
     } catch (error) {
-      setErrors({ general: 'An error occurred. Please try again.' });
+      setErrors({ general: "An error occurred. Please try again." });
     } finally {
       setIsLoading(false);
     }
@@ -101,14 +99,14 @@ const Signup = () => {
     <div className={styles.signupContainer}>
       {/* Left Side - Features */}
       <div className={styles.leftSide}>
-        <div className={styles.logoContainer}>
+        {/* <div className={styles.logoContainer}>
           <img src={DesireHubLogo} alt="DesireHub" className={styles.logo} />
-        </div>
-        
+        </div> */}
+
         <div className={styles.featuresContent}>
           <h1 className={styles.mainTitle}>Start your 30-day free trial</h1>
           <p className={styles.subtitle}>No credit card required</p>
-          
+
           <div className={styles.features}>
             <div className={styles.feature}>
               <div className={styles.featureIcon}>
@@ -116,27 +114,36 @@ const Signup = () => {
               </div>
               <div className={styles.featureContent}>
                 <h3>Invite unlimited colleagues</h3>
-                <p>Integrate with guaranteed developer-friendly APIs or openly to choose a build-ready or low-code solution.</p>
+                <p>
+                  Integrate with guaranteed developer-friendly APIs or openly to
+                  choose a build-ready or low-code solution.
+                </p>
               </div>
             </div>
-            
+
             <div className={styles.feature}>
               <div className={styles.featureIcon}>
                 <i className="fas fa-shield-alt"></i>
               </div>
               <div className={styles.featureContent}>
                 <h3>Ensure compliance</h3>
-                <p>Receive detailed insights on all your numbers in real-time, see where visitors are coming from.</p>
+                <p>
+                  Receive detailed insights on all your numbers in real-time,
+                  see where visitors are coming from.
+                </p>
               </div>
             </div>
-            
+
             <div className={styles.feature}>
               <div className={styles.featureIcon}>
                 <i className="fas fa-lock"></i>
               </div>
               <div className={styles.featureContent}>
                 <h3>Built-in security</h3>
-                <p>Keep your team members and customers in the loop by sharing your dashboard publicly.</p>
+                <p>
+                  Keep your team members and customers in the loop by sharing
+                  your dashboard publicly.
+                </p>
               </div>
             </div>
           </div>
@@ -177,11 +184,17 @@ const Signup = () => {
                   placeholder="First Name"
                   value={formData.firstName}
                   onChange={handleInputChange}
-                  className={`${styles.input} ${errors.firstName ? styles.error : ''}`}
+                  className={`${styles.input} ${
+                    errors.firstName ? styles.error : ""
+                  }`}
                   required
                 />
                 <i className="fas fa-user"></i>
-                {errors.firstName && <span className={styles.errorMessage}>{errors.firstName}</span>}
+                {errors.firstName && (
+                  <span className={styles.errorMessage}>
+                    {errors.firstName}
+                  </span>
+                )}
               </div>
 
               <div className={styles.inputGroup}>
@@ -191,11 +204,15 @@ const Signup = () => {
                   placeholder="Last Name"
                   value={formData.lastName}
                   onChange={handleInputChange}
-                  className={`${styles.input} ${errors.lastName ? styles.error : ''}`}
+                  className={`${styles.input} ${
+                    errors.lastName ? styles.error : ""
+                  }`}
                   required
                 />
                 <i className="fas fa-user"></i>
-                {errors.lastName && <span className={styles.errorMessage}>{errors.lastName}</span>}
+                {errors.lastName && (
+                  <span className={styles.errorMessage}>{errors.lastName}</span>
+                )}
               </div>
             </div>
 
@@ -206,11 +223,15 @@ const Signup = () => {
                 placeholder="Username"
                 value={formData.username}
                 onChange={handleInputChange}
-                className={`${styles.input} ${errors.username ? styles.error : ''}`}
+                className={`${styles.input} ${
+                  errors.username ? styles.error : ""
+                }`}
                 required
               />
               <i className="fas fa-at"></i>
-              {errors.username && <span className={styles.errorMessage}>{errors.username}</span>}
+              {errors.username && (
+                <span className={styles.errorMessage}>{errors.username}</span>
+              )}
             </div>
 
             <div className={styles.inputGroup}>
@@ -220,11 +241,15 @@ const Signup = () => {
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className={`${styles.input} ${errors.email ? styles.error : ''}`}
+                className={`${styles.input} ${
+                  errors.email ? styles.error : ""
+                }`}
                 required
               />
               <i className="fas fa-envelope"></i>
-              {errors.email && <span className={styles.errorMessage}>{errors.email}</span>}
+              {errors.email && (
+                <span className={styles.errorMessage}>{errors.email}</span>
+              )}
             </div>
 
             <div className={styles.inputGroup}>
@@ -234,7 +259,9 @@ const Signup = () => {
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleInputChange}
-                className={`${styles.input} ${errors.password ? styles.error : ''}`}
+                className={`${styles.input} ${
+                  errors.password ? styles.error : ""
+                }`}
                 required
               />
               <i className="fas fa-lock"></i>
@@ -244,31 +271,37 @@ const Signup = () => {
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
-                <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                <i
+                  className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+                ></i>
               </button>
-              {errors.password && <span className={styles.errorMessage}>{errors.password}</span>}
+              {errors.password && (
+                <span className={styles.errorMessage}>{errors.password}</span>
+              )}
             </div>
 
-            <p className={styles.passwordHint}>Minimum length is 8 characters</p>
+            <p className={styles.passwordHint}>
+              Minimum length is 8 characters
+            </p>
 
             <button
               type="submit"
               className={styles.signupButton}
               disabled={isLoading}
             >
-              {isLoading ? (
-                <div className={styles.spinner}></div>
-              ) : (
-                'Sign Up'
-              )}
+              {isLoading ? <div className={styles.spinner}></div> : "Sign Up"}
             </button>
 
             <p className={styles.termsText}>
-              By creating an account, you agree to the Terms of Service. We'll occasionally send you account-related emails.
+              By creating an account, you agree to the Terms of Service. We'll
+              occasionally send you account-related emails.
             </p>
 
             <p className={styles.loginText}>
-              Already have an account? <Link to="/login" className={styles.loginLink}>Login</Link>
+              Already have an account?{" "}
+              <Link to="/login" className={styles.loginLink}>
+                Login
+              </Link>
             </p>
           </form>
         </div>

@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router';
-import styles from './Login.module.scss';
-import DesireHubLogo from '../../assets/images/Desirehublogo.png';
+import React, { useState } from "react";
+import { Link } from "react-router";
+import styles from "./Login.module.scss";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    rememberMe: false
+    email: "",
+    password: "",
+    rememberMe: false,
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -15,60 +14,59 @@ const Login = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ''
+        [name]: "",
       }));
     }
   };
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.email) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = "Please enter a valid email address";
     }
-    
+
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Password is required";
     } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters long';
+      newErrors.password = "Password must be at least 8 characters long";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
-    
+
     setIsLoading(true);
-    
+
     try {
       // TODO: Implement backend authentication
-      console.log('Login attempt:', formData);
-      
+      console.log("Login attempt:", formData);
+
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // For now, just show success message
-      alert('Login functionality will be implemented with backend!');
-      
+      alert("Login functionality will be implemented with backend!");
     } catch (error) {
-      setErrors({ general: 'An error occurred. Please try again.' });
+      setErrors({ general: "An error occurred. Please try again." });
     } finally {
       setIsLoading(false);
     }
@@ -78,9 +76,9 @@ const Login = () => {
     <div className={styles.loginContainer}>
       {/* Left Side - Features */}
       <div className={styles.leftSide}>
-        <div className={styles.logoContainer}>
+        {/* <div className={styles.logoContainer}>
           <img src={DesireHubLogo} alt="DesireHub" className={styles.logo} />
-        </div>
+        </div> */}
 
         <div className={styles.featuresContent}>
           <h1 className={styles.mainTitle}>Start your 30-day free trial</h1>
@@ -93,7 +91,9 @@ const Login = () => {
               </div>
               <div className={styles.featureContent}>
                 <h3>Vip Experience Highlights</h3>
-                <p>Experience VIP access to exclusive content and experiences.</p>
+                <p>
+                  Experience VIP access to exclusive content and experiences.
+                </p>
               </div>
             </div>
 
@@ -103,7 +103,10 @@ const Login = () => {
               </div>
               <div className={styles.featureContent}>
                 <h3>Ensure compliance</h3>
-                <p>Receive detailed insights on all your numbers in real-time, see where visitors are coming from.</p>
+                <p>
+                  Receive detailed insights on all your numbers in real-time,
+                  see where visitors are coming from.
+                </p>
               </div>
             </div>
 
@@ -113,7 +116,10 @@ const Login = () => {
               </div>
               <div className={styles.featureContent}>
                 <h3>Built-in security</h3>
-                <p>Keep your team members and customers in the loop by sharing your dashboard publicly.</p>
+                <p>
+                  Keep your team members and customers in the loop by sharing
+                  your dashboard publicly.
+                </p>
               </div>
             </div>
           </div>
@@ -153,11 +159,15 @@ const Login = () => {
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className={`${styles.input} ${errors.email ? styles.error : ''}`}
+                className={`${styles.input} ${
+                  errors.email ? styles.error : ""
+                }`}
                 required
               />
               <i className="fas fa-envelope"></i>
-              {errors.email && <span className={styles.errorMessage}>{errors.email}</span>}
+              {errors.email && (
+                <span className={styles.errorMessage}>{errors.email}</span>
+              )}
             </div>
 
             <div className={styles.inputGroup}>
@@ -167,7 +177,9 @@ const Login = () => {
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleInputChange}
-                className={`${styles.input} ${errors.password ? styles.error : ''}`}
+                className={`${styles.input} ${
+                  errors.password ? styles.error : ""
+                }`}
                 required
               />
               <i className="fas fa-lock"></i>
@@ -177,31 +189,37 @@ const Login = () => {
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
-                <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                <i
+                  className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+                ></i>
               </button>
-              {errors.password && <span className={styles.errorMessage}>{errors.password}</span>}
+              {errors.password && (
+                <span className={styles.errorMessage}>{errors.password}</span>
+              )}
             </div>
 
-            <p className={styles.passwordHint}>Minimum length is 8 characters</p>
+            <p className={styles.passwordHint}>
+              Minimum length is 8 characters
+            </p>
 
             <button
               type="submit"
               className={styles.loginButton}
               disabled={isLoading}
             >
-              {isLoading ? (
-                <div className={styles.spinner}></div>
-              ) : (
-                'Log In'
-              )}
+              {isLoading ? <div className={styles.spinner}></div> : "Log In"}
             </button>
 
             <p className={styles.termsText}>
-              By creating an account, you agree to the Terms of Service. We'll occasionally send you account-related emails.
+              By creating an account, you agree to the Terms of Service. We'll
+              occasionally send you account-related emails.
             </p>
 
             <p className={styles.signupText}>
-              Don't have an account? <Link to="/signup" className={styles.signupLink}>Sign up</Link>
+              Don't have an account?{" "}
+              <Link to="/signup" className={styles.signupLink}>
+                Sign up
+              </Link>
             </p>
           </form>
         </div>
