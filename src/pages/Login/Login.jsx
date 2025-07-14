@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import styles from "./Login.module.scss";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -57,14 +58,18 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      // TODO: Implement backend authentication
+      // Simulate login process (no real authentication)
       console.log("Login attempt:", formData);
 
-      // Simulate API call
+      // Simulate API call delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // For now, just show success message
-      alert("Login functionality will be implemented with backend!");
+      // Store login state in localStorage for demo purposes
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userEmail', formData.email);
+
+      // Redirect to home page
+      navigate('/home');
     } catch (error) {
       setErrors({ general: "An error occurred. Please try again." });
     } finally {
@@ -135,15 +140,7 @@ const Login = () => {
               <button type="button" className={styles.socialButton}>
                 <i className="fab fa-google"></i>
                 Google
-              </button>
-              <button type="button" className={styles.socialButton}>
-                <i className="fab fa-github"></i>
-                GitHub
-              </button>
-              <button type="button" className={styles.socialButton}>
-                <i className="fab fa-gitlab"></i>
-                GitLab
-              </button>
+              </button>      
             </div>
           </div>
 
@@ -209,7 +206,7 @@ const Login = () => {
             >
               {isLoading ? <div className={styles.spinner}></div> : "Log In"}
             </button>
-
+              
             <p className={styles.termsText}>
               By creating an account, you agree to the Terms of Service. We'll
               occasionally send you account-related emails.

@@ -160,14 +160,6 @@ const Signup = () => {
                 <i className="fab fa-google"></i>
                 Google
               </button>
-              <button type="button" className={styles.socialButton}>
-                <i className="fab fa-github"></i>
-                GitHub
-              </button>
-              <button type="button" className={styles.socialButton}>
-                <i className="fab fa-gitlab"></i>
-                GitLab
-              </button>
             </div>
           </div>
 

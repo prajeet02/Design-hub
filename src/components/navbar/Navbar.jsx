@@ -29,9 +29,9 @@ const Navbar = () => {
             isScrolled ? ` ${styles.scrolled}` : ""
           }`}
         >
-          <Link to="/performers">PERFORMERS PAGE</Link>
-          <a href="#commercial">VIP</a>
-          <Link to="/login">LOGIN</Link>
+          <a href="/performers">PERFORMERS PAGE</a>
+          <Link to="/">VIP</Link>
+          <Link to="/">LOGIN</Link>
         </div>
         <div className={`${styles.navbar__section} ${styles.navbar__center}`}>
           <Link to="/home">
@@ -51,9 +51,10 @@ const Navbar = () => {
             isScrolled ? ` ${styles.scrolled}` : ""
           }`}
         >
-          <Link to="/about">ABOUT US</Link>
+          <Link to="/aboutus">ABOUT US</Link>
         </div>
       </div>
+      <div style={{ height: "200vh", background: "#eee" }}></div>
     </header>
   );
 };
