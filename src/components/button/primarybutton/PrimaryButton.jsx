@@ -1,11 +1,24 @@
 import React from "react";
 import styles from "./PrimaryButton.module.scss";
 
-const PrimaryButton = () => {
+const PrimaryButton = ({
+  text = "Primary Button",
+  hasGlow = false,
+  onClick,
+  className = "",
+}) => {
+  const buttonClasses = [
+    styles.primaryButton,
+    hasGlow ? styles["glow-effect"] : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <div className={styles.primaryButton}>
-      <button>Primary Button</button>
-    </div>
+    <button className={buttonClasses} onClick={onClick}>
+      {text}
+    </button>
   );
 };
 

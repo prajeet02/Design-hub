@@ -60,12 +60,12 @@
       font-weight: 500;
       z-index: 2;
 
-      &.inStock {
+      &.available {
         background: #10b981;
         color: white;
       }
 
-      &.outOfStock {
+      &.booked {
         background: #6b7280;
         color: white;
       }

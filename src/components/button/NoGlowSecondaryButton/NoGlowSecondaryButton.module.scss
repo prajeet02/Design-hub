@@ -1,7 +1,5 @@
-secondaryButton {
+button {
   --glow-color: rgb(217, 176, 255);
-  --glow-spread-color: rgba(191, 123, 255, 0.781);
-  --enhanced-glow-color: rgb(231, 206, 255);
   --btn-color: rgb(100, 61, 136);
   border: 0.25em solid var(--glow-color);
   padding: 1em 3em;
@@ -19,7 +17,7 @@ secondaryButton {
   transition: all 0.3s;
 }
 
-secondaryButton::after {
+button::after {
   pointer-events: none;
   content: "";
   position: absolute;
@@ -33,7 +31,7 @@ secondaryButton::after {
   transform: perspective(1.5em) rotateX(35deg) scale(1, 0.6);
 }
 
-secondaryButton:hover {
+button:hover {
   color: var(--btn-color);
   background-color: var(--glow-color);
   box-shadow: 0 0 1em 0.25em var(--glow-color),
@@ -41,7 +39,7 @@ secondaryButton:hover {
     inset 0 0 0.75em 0.25em var(--glow-color);
 }
 
-secondaryButton:active {
+button:active {
   box-shadow: 0 0 0.6em 0.25em var(--glow-color),
     0 0 2.5em 2em var(--glow-spread-color),
     inset 0 0 0.5em 0.25em var(--glow-color);

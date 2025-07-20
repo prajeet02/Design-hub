@@ -47,26 +47,22 @@ const AboutUs = () => {
       <main className={styles.aboutUsContent}>
         <h1>About Us</h1>
         <p>
-          Welcome to DesireHub, your premier destination for exclusive content
-          and premium experiences.
+          DesireHub: From Fan to Fantasy. Where premium meets personal.
         </p>
 
         <section id="mission" ref={missionRef} className={styles.section}>
           <h2>Our Mission</h2>
           <p>
-            At DesireHub, we're committed to providing a platform that connects
-            creators with their audience in a secure, respectful environment.
-            Our mission is to empower content creators while delivering
-            exceptional experiences to our users.
+            At DesireHub, we believe adult entertainment can be more than just content — it can be art, connection, and unforgettable experience. We bring fans and elite performers together to co-create cinematic, safe, and luxury-driven scenes. Our mission is to empower both sides: performers as artists, fans as co-stars, and the industry as a place of respect and innovation.
           </p>
         </section>
 
         <section id="values" ref={valuesRef} className={styles.section}>
           <h2>Our Values</h2>
           <p>
-            We believe in transparency, privacy, and respect. These core values
-            guide everything we do, from how we build our platform to how we
-            interact with our community.
+            Elegance: Luxury in every detail — from booking to production.
+            Safety: Consent, privacy, and professionalism, always.
+            Innovation: Pioneering the next era of adult fantasy experiences.
           </p>
           <ul>
             <li>Privacy & Security</li>
@@ -79,24 +75,8 @@ const AboutUs = () => {
         <section id="team" ref={teamRef} className={styles.section}>
           <h2>Our Team</h2>
           <p>
-            Our diverse team of professionals is dedicated to creating the best
-            possible platform for both creators and users. With backgrounds in
-            technology, security, and content creation, we bring a wealth of
-            experience to DesireHub.
+            A global mix of industry pros, creative directors, and fan experience designers — united to deliver the best fantasy production platform on earth.
           </p>
-          <div className={styles.teamGrid}>
-            {/* Team member cards would go here */}
-            <div className={styles.teamMember}>
-              <div className={styles.memberPhoto}></div>
-              <h3>Jane Doe</h3>
-              <p>Founder & CEO</p>
-            </div>
-            <div className={styles.teamMember}>
-              <div className={styles.memberPhoto}></div>
-              <h3>John Smith</h3>
-              <p>CTO</p>
-            </div>
-          </div>
         </section>
       </main>
       <div className={styles["footer-wrapper"]}>

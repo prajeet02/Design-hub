@@ -19,8 +19,8 @@ const Hero = () => {
 
       {/* Hero Buttons Section */}
       <div className={styles["hero-buttons"]}>
-        <PrimaryButton />
-        <SecondaryButton />
+        <PrimaryButton text="Get Started" hasGlow={true} />
+        <PrimaryButton text="Learn More" hasGlow={true} />
       </div>
 
       {/* Cards Section */}

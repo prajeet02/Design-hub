@@ -2,7 +2,7 @@ import styles from './ProductCard.module.scss';
 
 const ProductCard = ({ product, onClick }) => {
     const { id, title, price, image, availability, gender, originalPrice } = product;
-    
+
     const isOnSale = originalPrice && originalPrice > price;
     const discountPercentage = isOnSale ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
 
@@ -15,14 +15,14 @@ const ProductCard = ({ product, onClick }) => {
                         -{discountPercentage}%
                     </div>
                 )}
-                <div className={`${styles.availabilityTag} ${availability === 'In Stock' ? styles.inStock : styles.outOfStock}`}>
+                <div className={`${styles.availabilityTag} ${availability === 'Available' ? styles.available : styles.booked}`}>
                     {availability}
                 </div>
                 <div className={styles.overlay}>
                     <button className={styles.viewButton}>View Details</button>
                 </div>
             </div>
-            
+
             <div className={styles.productInfo}>
                 <div className={styles.productMeta}>
                     <span className={styles.gender}>{gender}</span>

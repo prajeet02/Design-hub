@@ -3,154 +3,119 @@ import FilterBar from "../filterbar/FilterBar";
 import ProductGrid from "../productgrid/ProductGrid";
 import styles from "./ProductsPage.module.scss";
 
-// Dummy product data
+// Import model images
+import model1 from "../../assets/images/models/1.jpg";
+import model2 from "../../assets/images/models/2.jpg";
+import model3 from "../../assets/images/models/3.jpg";
+import model4 from "../../assets/images/models/4.jpg";
+import model5 from "../../assets/images/models/5.jpg";
+import model6 from "../../assets/images/models/6.jpg";
+
+// Model profiles data
 const dummyProducts = [
   {
     id: 1,
-    title: "Premium Wireless Headphones",
-    price: 199,
-    originalPrice: 249,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",
-    availability: "In Stock",
-    gender: "Unisex",
+    title: "Sophia Elite",
+    price: 299,
+    originalPrice: 399,
+    image: model1,
+    availability: "Available",
+    gender: "Female",
     description:
-      "High-quality wireless headphones with noise cancellation and premium sound quality. Perfect for music lovers and professionals.",
-    sizes: ["One Size"],
+      "Professional model with extensive experience in fashion and commercial photography. Specializes in high-end fashion shoots and brand campaigns.",
+    sizes: ["Premium Package"],
     features: [
-      "Noise Cancellation",
-      "30-hour Battery",
-      "Wireless Charging",
-      "Premium Sound Quality",
+      "Fashion Photography",
+      "Commercial Shoots",
+      "Brand Campaigns",
+      "Professional Portfolio",
     ],
   },
   {
     id: 2,
-    title: "Men's Athletic Running Shoes",
-    price: 129,
-    image:
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop",
-    availability: "In Stock",
-    gender: "Men",
+    title: "Isabella Grace",
+    price: 249,
+    image: model2,
+    availability: "Available",
+    gender: "Female",
     description:
-      "Lightweight and comfortable running shoes designed for performance and style. Perfect for daily workouts and casual wear.",
-    sizes: ["8", "9", "10", "11", "12"],
+      "Versatile model with expertise in lifestyle and beauty photography. Known for natural expressions and professional demeanor.",
+    sizes: ["Standard Package", "Premium Package"],
     features: [
-      "Breathable Mesh",
-      "Cushioned Sole",
-      "Lightweight Design",
-      "Durable Construction",
+      "Lifestyle Photography",
+      "Beauty Shoots",
+      "Natural Expressions",
+      "Professional Experience",
     ],
   },
   {
     id: 3,
-    title: "Women's Designer Handbag",
-    price: 89,
-    originalPrice: 120,
-    image:
-      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",
-    availability: "Out of Stock",
-    gender: "Women",
+    title: "Victoria Luxe",
+    price: 199,
+    originalPrice: 279,
+    image: model3,
+    availability: "Booked",
+    gender: "Female",
     description:
-      "Elegant designer handbag crafted from premium materials. Features multiple compartments and a timeless design.",
-    sizes: ["One Size"],
+      "Elegant model specializing in luxury brand photography and high-fashion editorial work. Perfect for sophisticated campaigns.",
+    sizes: ["Premium Package"],
     features: [
-      "Premium Leather",
-      "Multiple Compartments",
-      "Adjustable Strap",
-      "Designer Hardware",
+      "Luxury Brands",
+      "Editorial Work",
+      "High Fashion",
+      "Sophisticated Style",
     ],
   },
   {
     id: 4,
-    title: "Smart Fitness Watch",
-    price: 299,
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",
-    availability: "In Stock",
-    gender: "Unisex",
+    title: "Anastasia Star",
+    price: 349,
+    image: model4,
+    availability: "Available",
+    gender: "Female",
     description:
-      "Advanced fitness tracking watch with heart rate monitoring, GPS, and smartphone connectivity.",
-    sizes: ["Small", "Medium", "Large"],
+      "Top-tier model with international experience. Specializes in runway, editorial, and commercial photography with exceptional versatility.",
+    sizes: ["Standard Package", "Premium Package", "Exclusive Package"],
     features: [
-      "Heart Rate Monitor",
-      "GPS Tracking",
-      "Water Resistant",
-      "7-day Battery",
+      "International Experience",
+      "Runway Modeling",
+      "Editorial Photography",
+      "Commercial Work",
     ],
   },
   {
     id: 5,
-    title: "Men's Casual Denim Jacket",
-    price: 79,
-    image:
-      "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop",
-    availability: "In Stock",
-    gender: "Men",
+    title: "Natasha Divine",
+    price: 229,
+    image: model5,
+    availability: "Available",
+    gender: "Female",
     description:
-      "Classic denim jacket with a modern fit. Perfect for layering and casual occasions.",
-    sizes: ["S", "M", "L", "XL"],
+      "Creative model with a passion for artistic photography and unique concepts. Brings creativity and professionalism to every shoot.",
+    sizes: ["Standard Package", "Premium Package"],
     features: [
-      "100% Cotton Denim",
-      "Classic Fit",
-      "Button Closure",
-      "Multiple Pockets",
+      "Artistic Photography",
+      "Creative Concepts",
+      "Unique Style",
+      "Professional Attitude",
     ],
   },
   {
     id: 6,
-    title: "Women's Yoga Leggings",
-    price: 45,
-    originalPrice: 60,
-    image:
-      "https://images.unsplash.com/photo-1506629905607-d9c36e0a3e3d?w=400&h=400&fit=crop",
-    availability: "In Stock",
-    gender: "Women",
-    description:
-      "High-performance yoga leggings with moisture-wicking fabric and four-way stretch.",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    features: [
-      "Moisture-Wicking",
-      "Four-Way Stretch",
-      "High Waistband",
-      "Squat-Proof Fabric",
-    ],
-  },
-  {
-    id: 7,
-    title: "Unisex Sunglasses",
-    price: 149,
-    image:
-      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop",
-    availability: "Out of Stock",
-    gender: "Unisex",
-    description:
-      "Stylish sunglasses with UV protection and polarized lenses. Perfect for any outdoor activity.",
-    sizes: ["One Size"],
-    features: [
-      "UV Protection",
-      "Polarized Lenses",
-      "Lightweight Frame",
-      "Scratch Resistant",
-    ],
-  },
-  {
-    id: 8,
-    title: "Women's Winter Coat",
+    title: "Elena Prestige",
     price: 189,
-    originalPrice: 250,
-    image:
-      "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=400&h=400&fit=crop",
-    availability: "In Stock",
-    gender: "Women",
+    originalPrice: 249,
+    image: model6,
+    availability: "Available",
+    gender: "Female",
     description:
-      "Warm and stylish winter coat with water-resistant fabric and insulated lining.",
-    sizes: ["XS", "S", "M", "L", "XL"],
+      "Experienced model with a focus on beauty and glamour photography. Known for stunning visuals and professional reliability.",
+    sizes: ["Standard Package", "Premium Package"],
     features: [
-      "Water Resistant",
-      "Insulated Lining",
-      "Adjustable Hood",
-      "Multiple Pockets",
+      "Beauty Photography",
+      "Glamour Shoots",
+      "Stunning Visuals",
+      "Professional Reliability",
     ],
   },
 ];
@@ -164,6 +129,8 @@ const ProductsPage = () => {
 
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+  const [showCartDropdown, setShowCartDropdown] = useState(false);
 
   const handleFilterChange = (filterType, value) => {
     setFilters((prev) => ({
@@ -198,10 +165,16 @@ const ProductsPage = () => {
         return false;
       }
 
-      // Availability filter
+      // Availability filter - map "In Stock" to "Available" and "Out of Stock" to "Booked"
+      let availabilityToCheck = filters.availability;
+      if (filters.availability === "In Stock")
+        availabilityToCheck = "Available";
+      if (filters.availability === "Out of Stock")
+        availabilityToCheck = "Booked";
+
       if (
         filters.availability !== "All" &&
-        product.availability !== filters.availability
+        product.availability !== availabilityToCheck
       ) {
         return false;
       }
@@ -220,6 +193,39 @@ const ProductsPage = () => {
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const toggleCartDropdown = () => {
+    setShowCartDropdown(!showCartDropdown);
+  };
+
+  const addToCart = (performer) => {
+    setCartItems((prev) => {
+      const existingItem = prev.find((item) => item.id === performer.id);
+      if (existingItem) {
+        return prev.map((item) =>
+          item.id === performer.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prev, { ...performer, quantity: 1 }];
+    });
+  };
+
+  const removeFromCart = (performerId) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== performerId));
+  };
+
+  const getTotalCartItems = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
+  const getTotalPrice = () => {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   };
 
   return (
@@ -254,18 +260,94 @@ const ProductsPage = () => {
 
         <div className={styles.mainContent}>
           <div className={styles.header}>
-            <h1>Products</h1>
-            <p className={styles.resultCount}>
-              {filteredProducts.length}{" "}
-              {filteredProducts.length === 1 ? "product" : "products"} found
-            </p>
-          </div>
+            <div className={styles.headerTop}>
+              <h1>PERFORMERS</h1>
+              <div className={styles.headerActions}>
+                <button className={styles.performerButton}>
+                  Be a Performer
+                </button>
+                <div className={styles.cartContainer}>
+                  <button
+                    className={styles.cartIcon}
+                    onClick={toggleCartDropdown}
+                    aria-label="View cart"
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.7 15.3C4.3 15.7 4.6 16.5 5.1 16.5H17M17 13V17C17 18.1 16.1 19 15 19H9C7.9 19 7 18.1 7 17V13M17 13H7"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    {getTotalCartItems() > 0 && (
+                      <span className={styles.cartBadge}>
+                        {getTotalCartItems()}
+                      </span>
+                    )}
+                  </button>
 
+                  {showCartDropdown && (
+                    <div className={styles.cartDropdown}>
+                      <div className={styles.cartHeader}>
+                        <h3>Booked Performers</h3>
+                        <button
+                          className={styles.closeCart}
+                          onClick={() => setShowCartDropdown(false)}
+                        >
+                          ×
+                        </button>
+                      </div>
+
+                      {cartItems.length === 0 ? (
+                        <div className={styles.emptyCart}>
+                          <p>No performers booked yet</p>
+                        </div>
+                      ) : (
+                        <>
+                          <div className={styles.cartItems}>
+                            {cartItems.map((item) => (
+                              <div key={item.id} className={styles.cartItem}>
+                                <img src={item.image} alt={item.title} />
+                                <div className={styles.itemDetails}>
+                                  <h4>{item.title}</h4>
+                                  <p>
+                                    ${item.price} × {item.quantity}
+                                  </p>
+                                </div>
+                                <button
+                                  className={styles.removeItem}
+                                  onClick={() => removeFromCart(item.id)}
+                                >
+                                  ×
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className={styles.cartFooter}>
+                            <div className={styles.cartTotal}>
+                              <strong>Total: ${getTotalPrice()}</strong>
+                            </div>
+                            <button className={styles.checkoutButton}>
+                              Proceed to Checkout
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
           <ProductGrid
             products={filteredProducts}
             onProductClick={handleProductClick}
             selectedProduct={selectedProduct}
             onCloseDetail={handleCloseDetail}
+            onAddToCart={addToCart}
           />
         </div>
       </div>

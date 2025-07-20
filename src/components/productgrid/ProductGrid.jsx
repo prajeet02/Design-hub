@@ -1,6 +1,6 @@
-import { useState } from "react";
+import React from "react";
 import ProductCard from "../productcard/ProductCard";
-import ProductDetail from "../productdetail/ProductDetail";
+import ExpandedProductModal from "../../features/PerformersPage/ExpandedProductModal/ExpandedProductModal";
 import styles from "./ProductGrid.module.scss";
 
 const ProductGrid = ({
@@ -8,6 +8,7 @@ const ProductGrid = ({
   onProductClick,
   selectedProduct,
   onCloseDetail,
+  onAddToCart,
 }) => {
   return (
     <div className={styles.productGridContainer}>
@@ -22,7 +23,11 @@ const ProductGrid = ({
       </div>
 
       {selectedProduct && (
-        <ProductDetail product={selectedProduct} onClose={onCloseDetail} />
+        <ExpandedProductModal
+          product={selectedProduct}
+          onClose={onCloseDetail}
+          onAddToCart={onAddToCart}
+        />
       )}
     </div>
   );

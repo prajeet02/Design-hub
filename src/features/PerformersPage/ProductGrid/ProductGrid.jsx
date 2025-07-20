@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
-import ProductDetail from '../ProductDetail/ProductDetail';
+import ExpandedProductModal from '../ExpandedProductModal/ExpandedProductModal';
 import styles from './ProductGrid.module.scss';
 
 const ProductGrid = ({ products, onProductClick, selectedProduct, onCloseDetail }) => {
@@ -15,9 +15,9 @@ const ProductGrid = ({ products, onProductClick, selectedProduct, onCloseDetail 
                     />
                 ))}
             </div>
-            
+
             {selectedProduct && (
-                <ProductDetail
+                <ExpandedProductModal
                     product={selectedProduct}
                     onClose={onCloseDetail}
                 />
