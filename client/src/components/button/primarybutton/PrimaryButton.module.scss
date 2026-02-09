@@ -2,63 +2,53 @@
   padding: 1em 3em;
   font-size: 15px;
   font-weight: bold;
-  border-radius: 1em;
+  border-radius: 14px;
   outline: none;
   position: relative;
   transition: all 0.3s;
   border: none;
   cursor: pointer;
-  background-color: #6d4bd4;
-  color: #fff;
+  color: #101018;
+  background: linear-gradient(135deg, var(--dh-accent-gold) 0%, var(--dh-accent-gold-2) 100%);
+  box-shadow: var(--dh-shadow-gold);
   
   &:hover {
-    background-color: #a084e8;
+    filter: brightness(1.03);
     transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(255, 204, 0, 0.24);
   }
   
   &:active {
     transform: translateY(0);
+    box-shadow: 0 14px 26px rgba(255, 204, 0, 0.18);
   }
 }
 
 .glow-effect {
-  --glow-color: rgb(217, 176, 255);
-  --glow-spread-color: rgba(191, 123, 255, 0.781);
-  --enhanced-glow-color: rgb(231, 206, 255);
-  --btn-color: rgb(100, 61, 136);
-  border: 0.25em solid var(--glow-color);
-  color: var(--glow-color);
-  background-color: var(--btn-color);
-  box-shadow: 0 0 1em 0.25em var(--glow-color),
-    0 0 4em 1em var(--glow-spread-color),
-    inset 0 0 0.75em 0.25em var(--glow-color);
-  text-shadow: 0 0 0.5em var(--glow-color);
-  
+  /* Add a premium glow without overriding the base gold styling */
+  box-shadow:
+    var(--dh-shadow-gold),
+    0 0 0 1px rgba(255, 204, 0, 0.30),
+    0 0 34px rgba(255, 204, 0, 0.22),
+    0 0 70px rgba(168, 85, 247, 0.10);
+
   &::after {
     pointer-events: none;
     content: "";
     position: absolute;
-    top: 120%;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: var(--glow-spread-color);
-    filter: blur(2em);
-    opacity: 0.7;
-    transform: perspective(1.5em) rotateX(35deg) scale(1, 0.6);
+    inset: -18px;
+    border-radius: inherit;
+    background:
+      radial-gradient(240px 80px at 20% 20%, rgba(255, 62, 129, 0.18), transparent 60%),
+      radial-gradient(260px 90px at 80% 30%, rgba(168, 85, 247, 0.14), transparent 60%),
+      radial-gradient(260px 90px at 50% 120%, rgba(255, 204, 0, 0.16), transparent 60%);
+    filter: blur(18px);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    z-index: -1;
   }
-  
-  &:hover {
-    color: var(--btn-color);
-    background-color: var(--glow-color);
-    box-shadow: 0 0 1em 0.25em var(--glow-color),
-      0 0 4em 2em var(--glow-spread-color),
-      inset 0 0 0.75em 0.25em var(--glow-color);
-  }
-  
-  &:active {
-    box-shadow: 0 0 0.6em 0.25em var(--glow-color),
-      0 0 2.5em 2em var(--glow-spread-color),
-      inset 0 0 0.5em 0.25em var(--glow-color);
+
+  &:hover::after {
+    opacity: 1;
   }
 }

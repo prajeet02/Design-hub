@@ -3,13 +3,19 @@
   max-width: 320px;
   padding: 2rem;
   overflow: hidden;
-  border-radius: 1.5rem;
-  background: linear-gradient(135deg, #2b1a47 0%, #1b1c36 100%);
-  border: 1.5px solid #4b357a;
-  box-shadow: 0 10px 40px rgba(108, 70, 196, 0.3);
-  transition: transform 0.3s;
+  border-radius: 18px;
+  background:
+    radial-gradient(700px 260px at 20% 0%, rgba(255, 62, 129, 0.14), transparent 60%),
+    radial-gradient(700px 260px at 90% 10%, rgba(168, 85, 247, 0.14), transparent 60%),
+    var(--dh-panel);
+  border: 1px solid var(--dh-border);
+  backdrop-filter: var(--dh-blur);
+  box-shadow: var(--dh-shadow-soft);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
   &:hover {
-    transform: scale(1.05);
+    transform: translateY(-6px);
+    border-color: rgba(255, 204, 0, 0.45);
+    box-shadow: var(--dh-shadow);
   }
 }
 
@@ -24,14 +30,14 @@
     right: -40px;
     top: 36px;
     width: 160px;
-    background: #d4af37;
-    color: #232447;
+    background: linear-gradient(135deg, var(--dh-accent-gold) 0%, var(--dh-accent-gold-2) 100%);
+    color: #101018;
     font-size: 0.85rem;
     font-weight: 600;
     padding: 0.25rem 0;
     text-align: center;
     border-radius: 0.25rem;
-    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.18);
+    box-shadow: var(--dh-shadow-gold);
     transform: rotate(45deg);
     z-index: 2;
   }
@@ -46,7 +52,7 @@
 }
 
 .heading {
-  color: #d4af37;
+  color: var(--dh-accent-gold);
   font-size: 0.95rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -54,12 +60,12 @@
 }
 
 .price {
-  color: #fff;
+  color: var(--dh-text);
   font-size: 2.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   .per {
-    color: #c9b6ff;
+    color: var(--dh-muted);
     font-size: 1.1rem;
     font-weight: 500;
     margin-left: 0.25rem;
@@ -67,7 +73,7 @@
 }
 
 .desc {
-  color: #d8d2f2;
+  color: var(--dh-muted);
   font-size: 0.95rem;
   line-height: 1.6;
 }
@@ -83,17 +89,17 @@
     padding: 0 1.5rem;
     font-size: 1rem;
     font-weight: 600;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #6d4bd4 0%, #a084e8 100%);
-    color: #fff;
-    box-shadow: 0 4px 16px rgba(108, 70, 196, 0.18);
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--dh-accent-gold) 0%, var(--dh-accent-gold-2) 100%);
+    color: #101018;
+    box-shadow: var(--dh-shadow-gold);
     border: none;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
     &:hover, &:focus {
-      background: linear-gradient(90deg, #d4af37 0%, #a084e8 100%);
-      color: #232447;
-      box-shadow: 0 6px 24px rgba(212, 175, 55, 0.18);
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+      box-shadow: 0 20px 40px rgba(255, 204, 0, 0.24);
       outline: none;
     }
   }

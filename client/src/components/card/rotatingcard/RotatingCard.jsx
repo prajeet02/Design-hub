@@ -14,24 +14,52 @@ const COLORS = [
   "245, 220, 255", // soft lilac
 ];
 
-const RotatingCard = () => {
-  const quantity = COLORS.length;
+const RotatingCard = ({ items = [], onItemClick }) => {
+  const safeItems = Array.isArray(items) ? items.filter(Boolean) : [];
+  const hasItems = safeItems.length > 0;
+  const quantity = hasItems ? safeItems.length : COLORS.length;
   return (
     <div
       className={styles.wrapper}
       style={{ height: "400px", width: "1200px" }}
     >
       <div className={styles.inner} style={{ "--quantity": quantity }}>
-        {COLORS.map((color, idx) => (
+        {(hasItems ? safeItems : COLORS).map((item, idx) => (
           <div
-            className={styles.card}
-            key={idx}
+            className={`${styles.card} ${hasItems ? styles.cardClickable : ""}`}
+            key={item?.id || idx}
             style={{
               "--index": idx,
-              "--color-card": color,
+              "--color-card": COLORS[idx % COLORS.length],
             }}
+            onClick={hasItems ? () => onItemClick?.(item) : undefined}
+            role={hasItems ? "button" : undefined}
+            tabIndex={hasItems ? 0 : undefined}
+            onKeyDown={
+              hasItems
+                ? (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      onItemClick?.(item);
+                    }
+                  }
+                : undefined
+            }
           >
-            <div className={styles.img} />
+            <div
+              className={styles.img}
+              style={{
+                "--img":
+                  hasItems && item?.image
+                    ? `url(${item.image})`
+                    : "none",
+              }}
+            />
+            {hasItems && (
+              <div className={styles.label}>
+                <div className={styles.name}>{item?.title || "Performer"}</div>
+              </div>
+            )}
           </div>
         ))}
       </div>

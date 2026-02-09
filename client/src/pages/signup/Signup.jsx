@@ -88,7 +88,7 @@ const Signup = () => {
 
       // For now, just show success message
       alert("Signup functionality will be implemented with backend!");
-    } catch (error) {
+	    } catch {
       setErrors({ general: "An error occurred. Please try again." });
     } finally {
       setIsLoading(false);

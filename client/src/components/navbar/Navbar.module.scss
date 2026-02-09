@@ -1,9 +1,7 @@
-/* Navbar Header */
-* {
-  margin: 0;
-  padding: 0;
+/* Navbar Header (scoped; avoid global resets) */
+.navbar,
+.navbar * {
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
 }
 
 .navbar {
@@ -13,6 +11,7 @@
     left: 0;
     width: 100vw;
     height: 10vh;
+    min-height: 72px;
     background: none;
     z-index: 1000;
     display: flex;
@@ -21,8 +20,10 @@
   }
 
   &__header.scrolled {
-    background: #151515;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	    background: rgba(0, 0, 0, 0.28);
+	    border-bottom: 1px solid var(--dh-border);
+	    backdrop-filter: var(--dh-blur);
+	    box-shadow: var(--dh-shadow-soft);
   }
 
   &__container {
@@ -73,7 +74,7 @@
 
   &__section a {
     text-decoration: none;
-    color: #ffcc00;
+	    color: var(--dh-accent-gold);
     font-weight: bold;
     font-size: 1.1vw;
     letter-spacing: 0.05vw;
@@ -87,21 +88,23 @@
 
 .logo {
   transition: width 0.3s, height 0.3s;
-  width: 20vw;
-  height: 20vw;
+  /* Keep the logo inside the fixed navbar height (prevents overlap with page content) */
+  width: clamp(72px, 9.5vh, 140px);
+  height: clamp(72px, 9.5vh, 140px);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
 
   &.shrink {
-    width: 15vw;
-    height: 15vw;
+    /* Keep logo size consistent (no shrinking on scroll) */
+    width: clamp(72px, 9.5vh, 140px);
+    height: clamp(72px, 9.5vh, 140px);
   }
 
   &.shrink img {
     width: 100%;
-    height: auto;
+    height: 100%;
   }
 
   &-text {
@@ -111,7 +114,8 @@
 
 .logo img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
   transition: width 0.3s, height 0.3s;
 }
 
@@ -125,7 +129,7 @@
 .subtitle {
   display: block;
   font-size: 1vw;
-  color: #222;
+  color: var(--dh-muted);
   font-weight: 500;
 }
 
@@ -133,6 +137,7 @@
   .navbar__header,
   .navbar__container {
     height: 6vh;
+    min-height: 56px;
   }
 
   .brand {
@@ -144,12 +149,12 @@
   }
 
   .logo {
-    width: 10vw;
-    height: 10vw;
+    width: clamp(56px, 6vh, 92px);
+    height: clamp(56px, 6vh, 92px);
 
     &.shrink {
-      width: 6vw;
-      height: 6vw;
+      width: clamp(56px, 6vh, 92px);
+      height: clamp(56px, 6vh, 92px);
     }
   }
 }

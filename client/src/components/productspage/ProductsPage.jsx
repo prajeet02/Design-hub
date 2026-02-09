@@ -1,7 +1,9 @@
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router";
 import FilterBar from "../filterbar/FilterBar";
 import ProductGrid from "../productgrid/ProductGrid";
 import styles from "./ProductsPage.module.scss";
+import { apiFetch } from "../../auth/api";
 
 // Import model images
 import model1 from "../../assets/images/models/1.jpg";
@@ -120,12 +122,31 @@ const dummyProducts = [
   },
 ];
 
+const fallbackImages = [model1, model2, model3, model4, model5, model6];
+
+const mergeUniqueProducts = (primary, secondary) => {
+	const out = [];
+	const seen = new Set();
+	for (const item of [...(primary || []), ...(secondary || [])]) {
+		const key = item?.id || item?._id || item?.title;
+		if (!key || seen.has(key)) continue;
+		seen.add(key);
+		out.push(item);
+	}
+	return out;
+};
+
 const ProductsPage = () => {
+	const navigate = useNavigate();
   const [filters, setFilters] = useState({
     gender: [],
     priceRange: [0, 1000],
     availability: "All",
   });
+
+	const [allProducts, setAllProducts] = useState(dummyProducts);
+	const [loading, setLoading] = useState(false);
+	const [loadError, setLoadError] = useState("");
 
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -147,8 +168,54 @@ const ProductsPage = () => {
     });
   };
 
-  const filteredProducts = useMemo(() => {
-    return dummyProducts.filter((product) => {
+	useEffect(() => {
+		let mounted = true;
+		const loadModels = async () => {
+			setLoading(true);
+			setLoadError("");
+			try {
+				const data = await apiFetch("/api/v1/models", { method: "GET" });
+				const models = Array.isArray(data?.models) ? data.models : [];
+				const mapped = models.map((m, idx) => ({
+						id: m?._id || m?.id || `model-${idx}`,
+						title: m?.title || m?.name || m?.stageName || "Performer",
+						price: m?.price,
+					originalPrice: m.originalPrice,
+					image:
+						m.imageUrl && String(m.imageUrl).trim().length > 0
+							? m.imageUrl
+							: fallbackImages[idx % fallbackImages.length],
+					availability: m.availability,
+					gender: m.gender,
+					description: m.description,
+					sizes: m.sizes || [],
+					features: m.features || [],
+					location: m.location || "",
+					tagline: m.tagline || "",
+				}));
+
+				if (!mounted) return;
+					setAllProducts(
+						mapped.length > 0
+							? mergeUniqueProducts(mapped, dummyProducts)
+							: dummyProducts
+					);
+			} catch (e) {
+				if (!mounted) return;
+				setLoadError(e?.message || "Failed to load performers");
+				setAllProducts(dummyProducts);
+			} finally {
+				if (mounted) setLoading(false);
+			}
+		};
+		loadModels();
+		return () => {
+			mounted = false;
+		};
+	}, []);
+
+	const filteredProducts = useMemo(() => {
+		return allProducts.filter((product) => {
       // Gender filter
       if (
         filters.gender.length > 0 &&
@@ -181,7 +248,7 @@ const ProductsPage = () => {
 
       return true;
     });
-  }, [filters]);
+	}, [filters, allProducts]);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -263,9 +330,28 @@ const ProductsPage = () => {
             <div className={styles.headerTop}>
               <h1>PERFORMERS</h1>
               <div className={styles.headerActions}>
-                <button className={styles.performerButton}>
+							<button
+								className={styles.performerButton}
+								onClick={() => navigate("/be-performer")}
+							>
                   Be a Performer
                 </button>
+								<button
+									className={styles.adminButton}
+									onClick={() => navigate("/admin-dashboard")}
+								>
+								  Admin Dashboard
+								</button>
+							{loadError ? (
+								<div style={{ color: "#fecaca", fontSize: 12 }}>
+									{loadError}
+								</div>
+							) : null}
+							{loading ? (
+								<div style={{ color: "rgba(255,255,255,0.7)", fontSize: 12 }}>
+									Loading...
+								</div>
+							) : null}
                 <div className={styles.cartContainer}>
                   <button
                     className={styles.cartIcon}

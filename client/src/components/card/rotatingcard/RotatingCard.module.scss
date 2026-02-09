@@ -45,28 +45,62 @@
   transform: rotateY(calc((360deg / var(--quantity)) * var(--index)))
     translateZ(var(--translateZ));
   transition: box-shadow 0.3s, transform 0.3s, z-index 0.3s;
+  background: rgba(0, 0, 0, 0.18);
+
+  &:focus-visible {
+    outline: 2px solid rgba(255, 204, 0, 0.75);
+    outline-offset: 4px;
+  }
 
   &:hover {
     box-shadow:
       0 8px 32px 0 rgba(60, 60, 80, 0.25),
-      0 0 0 2px #fff;
+      0 0 0 2px rgba(255, 204, 0, 0.55);
     transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ)) scale(1.10) translateY(-12px);
     z-index: 20;
     cursor: pointer;
   }
 }
 
+.cardClickable {
+  cursor: pointer;
+}
+
 .img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background:
-    radial-gradient(circle at 70% 30%, rgba(212, 175, 55, 0.12) 0%, transparent 60%), /* gold highlight */
-    #0000
+  background-image:
+    radial-gradient(circle at 70% 30%, rgba(255, 204, 0, 0.14) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.55) 100%),
+    var(--img),
     radial-gradient(
       circle,
-      rgba(var(--color-card), 0.2) 0%,
-      rgba(var(--color-card), 0.6) 80%,
-      rgba(var(--color-card), 0.9) 100%
+      rgba(var(--color-card), 0.18) 0%,
+      rgba(var(--color-card), 0.55) 80%,
+      rgba(var(--color-card), 0.85) 100%
     );
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 10px 9px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.78) 100%);
+  text-align: left;
+}
+
+.name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -13,7 +13,7 @@ const ExpandedProductModal = ({ product, onClose, onAddToCart }) => {
         };
     }, []);
 
-    const { title, price, image, availability, gender, originalPrice, description, features } = product;
+    const { title, price, image, availability, originalPrice, description, tagline, location } = product;
 
     const isOnSale = originalPrice && originalPrice > price;
     const discountPercentage = isOnSale ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
@@ -108,7 +108,9 @@ const ExpandedProductModal = ({ product, onClose, onAddToCart }) => {
 
                     {/* About Section */}
                     <div className={styles.aboutSection}>
-                        <p className={styles.tagline}>Adrenaline junkie, getting your heart racing 😈</p>
+                        <p className={styles.tagline}>
+                            {tagline || 'Adrenaline junkie, getting your heart racing 😈'}
+                        </p>
                         <div className={styles.subscribeInfo}>
                             <span className={styles.subscribeText}>Subscribe to my VIP ❤️ 👇</span>
                             <div className={styles.priceContainer}>
@@ -125,7 +127,7 @@ const ExpandedProductModal = ({ product, onClose, onAddToCart }) => {
                                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2"/>
                                 <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
                             </svg>
-                            <span>Gold Coast</span>
+                            <span>{location || 'Gold Coast'}</span>
                         </div>
                     </div>
 

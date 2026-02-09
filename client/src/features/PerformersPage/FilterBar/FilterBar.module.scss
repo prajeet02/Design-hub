@@ -1,12 +1,13 @@
 .filterBar {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: var(--dh-panel);
+  border: 1px solid var(--dh-border);
+  backdrop-filter: var(--dh-blur);
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--dh-shadow-soft);
   height: fit-content;
   position: sticky;
-  top: 20px;
+  top: calc(var(--dh-nav-offset) + 12px);
 
   .filterHeader {
     display: flex;
@@ -14,19 +15,19 @@
     align-items: center;
     margin-bottom: 24px;
     padding-bottom: 16px;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--dh-border);
 
     h3 {
       margin: 0;
       font-size: 1.25rem;
       font-weight: 600;
-      color: #1f2937;
+      color: var(--dh-text);
     }
 
     .clearButton {
       background: none;
       border: none;
-      color: #6366f1;
+      color: var(--dh-accent-gold);
       font-size: 0.875rem;
       font-weight: 500;
       cursor: pointer;
@@ -35,8 +36,8 @@
       transition: all 0.2s ease;
 
       &:hover {
-        background: #f3f4f6;
-        color: #4f46e5;
+        background: rgba(255, 204, 0, 0.10);
+        color: var(--dh-accent-gold);
       }
     }
   }
@@ -48,7 +49,7 @@
       margin: 0 0 12px 0;
       font-size: 1rem;
       font-weight: 500;
-      color: #374151;
+      color: var(--dh-text);
     }
 
     .checkboxGroup,
@@ -64,11 +65,11 @@
       align-items: center;
       cursor: pointer;
       font-size: 0.875rem;
-      color: #6b7280;
+      color: var(--dh-muted);
       transition: color 0.2s ease;
 
       &:hover {
-        color: #374151;
+        color: var(--dh-text);
       }
 
       input[type="checkbox"],
@@ -80,7 +81,7 @@
       .radiomark {
         width: 16px;
         height: 16px;
-        border: 2px solid #d1d5db;
+        border: 2px solid var(--dh-border-2);
         margin-right: 8px;
         transition: all 0.2s ease;
         position: relative;
@@ -96,7 +97,7 @@
           top: 1px;
           width: 4px;
           height: 8px;
-          border: solid white;
+          border: solid #101018;
           border-width: 0 2px 2px 0;
           transform: rotate(45deg);
           opacity: 0;
@@ -115,7 +116,7 @@
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: white;
+          background: #101018;
           opacity: 0;
           transition: opacity 0.2s ease;
         }
@@ -123,8 +124,8 @@
 
       input[type="checkbox"]:checked+.checkmark,
       input[type="radio"]:checked+.radiomark {
-        background: #6366f1;
-        border-color: #6366f1;
+        background: var(--dh-accent-gold);
+        border-color: var(--dh-accent-gold);
 
         &::after {
           opacity: 1;
@@ -141,22 +142,24 @@
         margin-bottom: 16px;
 
         span {
-          color: #6b7280;
+          color: var(--dh-muted);
           font-weight: 500;
         }
 
         .priceInput {
           flex: 1;
           padding: 8px 12px;
-          border: 1px solid #d1d5db;
+          border: 1px solid var(--dh-border);
           border-radius: 6px;
           font-size: 0.875rem;
           transition: border-color 0.2s ease;
+          background: rgba(0, 0, 0, 0.22);
+          color: var(--dh-text);
 
           &:focus {
             outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            border-color: rgba(255, 204, 0, 0.55);
+            box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.12);
           }
         }
       }
@@ -170,7 +173,7 @@
           width: 100%;
           height: 4px;
           border-radius: 2px;
-          background: #e5e7eb;
+          background: rgba(255, 255, 255, 0.14);
           outline: none;
           appearance: none;
           cursor: pointer;
@@ -180,7 +183,7 @@
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            background: #6366f1;
+            background: var(--dh-accent-gold);
             cursor: pointer;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s ease;
@@ -194,7 +197,7 @@
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            background: #6366f1;
+            background: var(--dh-accent-gold);
             cursor: pointer;
             border: none;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);

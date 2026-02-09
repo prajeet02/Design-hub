@@ -1,10 +1,15 @@
 .card {
   width: 220px;
   height: 280px;
-  background: rgba(var(--color1));
+  background:
+    radial-gradient(220px 120px at 20% 20%, rgba(var(--color2), 0.18), transparent 60%),
+    linear-gradient(135deg, rgba(var(--color1), 0.28) 0%, rgba(var(--color2), 0.12) 100%),
+    var(--dh-panel);
   transition: all 0.4s cubic-bezier(.4,0,.2,1);
   border-radius: 18px;
-  box-shadow: 0 6px 24px rgba(128, 122, 142, 0.18);
+  border: 1px solid var(--dh-border);
+  backdrop-filter: var(--dh-blur);
+  box-shadow: var(--dh-shadow-soft);
   // box-shadow: 0 6px 24px rgba(9, 171, 235, 0.847);
   font-size: 1.6rem;
   font-weight: 700;
@@ -17,13 +22,13 @@
 
   &:hover {
     cursor: pointer;
-    transform: scale(1.07);
-    background: rgba(var(--color2));
-    box-shadow: 0 8px 32px 0 rgba(160, 132, 232, 0.25), 0 0 0 2px #a084e8;
+    transform: translateY(-6px) scale(1.03);
+    border-color: rgba(255, 204, 0, 0.45);
+    box-shadow: var(--dh-shadow);
   }
 
   .first-content {
-    background: rgba(var(--color1));
+    background: transparent;
     height: 100%;
     width: 100%;
     transition: all 0.4s cubic-bezier(.4,0,.2,1);
@@ -35,11 +40,11 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(135deg, rgba(var(--color1), 1) 60%, rgba(var(--color2), 0.18) 100%);
+    background: linear-gradient(135deg, rgba(var(--color1), 0.38) 60%, rgba(var(--color2), 0.18) 100%);
     // background: linear-gradient(135deg, #2b1a47, #1b1c36);
 
     span {
-      color: #fff;
+      color: var(--dh-text);
       font-size: 1.3rem;
       font-weight: 600;
       letter-spacing: 0.5px;
@@ -51,11 +56,11 @@
     height: 0;
     transform: scale(0.95);
     // background: rgba(var(--color2));
-    background: linear-gradient(135deg, rgba(var(--color2), 1) 60%, rgba(var(--color1), 0.18) 100%);
+    background: linear-gradient(135deg, rgba(var(--color2), 0.60) 60%, rgba(var(--color1), 0.18) 100%);
   }
 
   .second-content {
-    background: rgba(var(--color2));
+    background: transparent;
     height: 100%;
     width: 100%;
     opacity: 0;
@@ -67,12 +72,12 @@
     position: absolute;
     inset: 0;
     z-index: 2;
-    background: linear-gradient(135deg, rgba(var(--color2), 1) 80%, rgba(var(--color1), 0.7) 100%);
+    background: linear-gradient(135deg, rgba(var(--color2), 0.85) 80%, rgba(var(--color1), 0.55) 100%);
     // background: linear-gradient(135deg, #2b1a47, #1b1c36);
 
 
     span {
-      color: #2b1a47;
+      color: #101018;
       font-size: 1.4rem;
       font-weight: 700;
       text-align: center;
@@ -85,6 +90,6 @@
   &:hover .second-content {
     opacity: 1;
     transform: rotateX(0deg);
-    background: linear-gradient(135deg, rgba(var(--color2), 1) 80%, rgba(var(--color1), 0.7) 100%);
+    background: linear-gradient(135deg, rgba(var(--color2), 0.90) 80%, rgba(var(--color1), 0.55) 100%);
   }
 }

@@ -3,8 +3,26 @@ import bcrypt from "bcrypt";
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 import { sendVerificationEmail, sendResetCodeEmail } from "../config/mailer.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+import Booking from "../models/booking.js";
+import Performer from "../models/performer.js";
 
 const router = express.Router();
+
+const toPublicUser = (user) => {
+  if (!user) return null;
+  return {
+    id: user._id?.toString?.() ?? user.id,
+    email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    role: user.role,
+    isAdmin: user.role === "admin",
+    isVerified: user.isVerified,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt,
+  };
+};
 
 // send verification code to email
 router.post("/send-verification-email", async (req, res) => {
@@ -112,20 +130,36 @@ router.post("/register", async (req, res) => {
       message: "email and password are required",
     });
   }
+  if (password.length < 8) {
+    return res.status(400).json({
+      success: false,
+      message: "password must be at least 8 characters long",
+    });
+  }
   try {
-    const user = await User.findOne({ email });
+    const requireEmailVerification =
+      process.env.REQUIRE_EMAIL_VERIFICATION === "true";
+
+    let user = await User.findOne({ email });
+
+    // If the user doesn't exist, create it directly (simple auth flow)
     if (!user) {
-      return res.status(400).json({
-        success: false,
-        message: "user not found, please verify your email first",
+      user = new User({
+        email,
+        firstName: firstName || "",
+        lastName: lastName || "",
+        isVerified: !requireEmailVerification,
       });
     }
-    if (!user.isVerified) {
+
+    // If email verification is enforced, registration can only complete after verification
+    if (requireEmailVerification && !user.isVerified) {
       return res.status(400).json({
         success: false,
         message: "email not verified",
       });
     }
+
     if (user.password && user.password.length > 0) {
       return res.status(400).json({
         success: false,
@@ -138,11 +172,28 @@ router.post("/register", async (req, res) => {
     user.password = hashedPassword;
     if (firstName) user.firstName = firstName;
     if (lastName) user.lastName = lastName;
+
+    // bootstrap: if no admin exists yet, promote this first registered user
+    const anyAdmin = await User.exists({ role: "admin" });
+    if (!anyAdmin) {
+      user.role = "admin";
+    }
+
+    // optional: allow setting admin(s) by env
+    const adminEmails = (process.env.ADMIN_EMAILS || "")
+      .split(",")
+      .map((e) => e.trim().toLowerCase())
+      .filter(Boolean);
+    if (adminEmails.includes(user.email.toLowerCase())) {
+      user.role = "admin";
+    }
+
     await user.save();
     // generate token
     const payload = {
       id: user._id,
       email: user.email,
+      role: user.role,
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "1h",
@@ -150,7 +201,7 @@ router.post("/register", async (req, res) => {
     res.status(201).json({
       success: true,
       message: "user registered successfully",
-      user: user,
+      user: toPublicUser(user),
       token,
     });
   } catch (error) {
@@ -182,6 +233,22 @@ router.post("/login", async (req, res) => {
       });
     }
 
+    const requireEmailVerification =
+      process.env.REQUIRE_EMAIL_VERIFICATION === "true";
+    if (requireEmailVerification && !user.isVerified) {
+      return res.status(400).json({
+        success: false,
+        message: "email not verified",
+      });
+    }
+
+    if (!user.password || user.password.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "user not registered",
+      });
+    }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(400).json({
@@ -193,6 +260,7 @@ router.post("/login", async (req, res) => {
     const payload = {
       id: user._id,
       email: user.email,
+      role: user.role,
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
@@ -201,7 +269,7 @@ router.post("/login", async (req, res) => {
     res.status(200).json({
       success: true,
       message: "user logged in successfully",
-      user: user,
+      user: toPublicUser(user),
       token,
     });
   } catch (error) {
@@ -228,6 +296,119 @@ router.post("/logout", (req, res) => {
     res.status(500).json({
       success: false,
       message: "failed to logout user",
+      error: error.message,
+    });
+  }
+});
+
+// get current user
+router.get("/me", authMiddleware, async (req, res) => {
+  return res.status(200).json({
+    success: true,
+    user: req.user,
+  });
+});
+
+// =====================
+// Bookings (user)
+// =====================
+
+// POST /api/v1/user/bookings
+// Body: { items: [{ modelId, quantity }], details?, scheduledAt? }
+router.post("/bookings", authMiddleware, async (req, res) => {
+  const { items, details, scheduledAt } = req.body;
+
+  if (!Array.isArray(items) || items.length === 0) {
+    return res.status(400).json({
+      success: false,
+      message: "items are required",
+    });
+  }
+
+  const normalizedItems = items
+    .map((it) => ({
+      modelId: it?.modelId,
+      quantity: Number(it?.quantity ?? 1),
+    }))
+    .filter((it) => it.modelId);
+
+  if (normalizedItems.length === 0) {
+    return res.status(400).json({
+      success: false,
+      message: "invalid items",
+    });
+  }
+
+  try {
+    const modelIds = normalizedItems.map((it) => String(it.modelId));
+    const uniqueModelIds = [...new Set(modelIds)];
+    const models = await Performer.find({
+      _id: { $in: uniqueModelIds },
+      isActive: true,
+    });
+
+    if (models.length !== uniqueModelIds.length) {
+      return res.status(400).json({
+        success: false,
+        message: "one or more models are invalid",
+      });
+    }
+
+    // Build snapshot items from current model docs
+    const modelById = new Map(models.map((m) => [m._id.toString(), m]));
+    const bookingItems = normalizedItems.map((it) => {
+      const m = modelById.get(String(it.modelId));
+      return {
+        modelId: m._id,
+        title: m.title,
+        price: m.price,
+        quantity: it.quantity && it.quantity > 0 ? it.quantity : 1,
+      };
+    });
+
+    const booking = await Booking.create({
+      userId: req.user.id,
+      items: bookingItems,
+      details: details || "",
+      scheduledAt: scheduledAt ? new Date(scheduledAt) : undefined,
+      status: "pending",
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "booking created",
+      booking,
+    });
+  } catch (error) {
+    if (error?.name === "CastError") {
+      return res.status(400).json({
+        success: false,
+        message: "invalid model id",
+      });
+    }
+    return res.status(500).json({
+      success: false,
+      message: "failed to create booking",
+      error: error.message,
+    });
+  }
+});
+
+// GET /api/v1/user/bookings
+router.get("/bookings", authMiddleware, async (req, res) => {
+  try {
+    const bookings = await Booking.find({ userId: req.user.id })
+      .sort({ createdAt: -1 })
+      .populate("items.modelId", "title imageUrl availability");
+
+    return res.status(200).json({
+      success: true,
+      bookings,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "failed to fetch bookings",
       error: error.message,
     });
   }
@@ -337,10 +518,10 @@ router.post("/reset-password", async (req, res) => {
       message: "email and new password are required",
     });
   }
-  if (newPassword.length < 6) {
+  if (newPassword.length < 8) {
     return res.status(400).json({
       success: false,
-      message: "password must be at least 6 characters long",
+      message: "password must be at least 8 characters long",
     });
   }
   try {

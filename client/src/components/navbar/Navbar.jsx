@@ -30,7 +30,6 @@ const Navbar = () => {
           }`}
         >
           <a href="/performers">PERFORMERS PAGE</a>
-          <Link to="/">VIP</Link>
           <Link to="/">LOGIN</Link>
         </div>
         <div className={`${styles.navbar__section} ${styles.navbar__center}`}>
@@ -54,7 +53,6 @@ const Navbar = () => {
           <Link to="/aboutus">ABOUT US</Link>
         </div>
       </div>
-      <div style={{ height: "200vh", background: "#eee" }}></div>
     </header>
   );
 };

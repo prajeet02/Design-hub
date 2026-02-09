@@ -1,7 +1,6 @@
-/* Two-Panel Login Design */
-* {
-  margin: 0;
-  padding: 0;
+/* Two-Panel Login Design (scoped to this page) */
+.loginContainer,
+.loginContainer * {
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -9,36 +8,40 @@
 .loginContainer {
   min-height: 100vh;
   display: flex;
-  background: #1a1a1a;
+  gap: 18px;
+  padding: var(--dh-nav-offset) clamp(16px, 4vw, 32px) 32px;
+  background: transparent;
 }
 
 /* Left Side - Features Panel */
 .leftSide {
   flex: 1;
-  background: #1a1a1a;
-  padding: 3rem;
+  background: var(--dh-panel);
+  border: 1px solid var(--dh-border);
+  backdrop-filter: var(--dh-blur);
+  box-shadow: var(--dh-shadow-soft);
+  border-radius: 18px;
+  padding: clamp(20px, 3.5vw, 48px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: white;
+  color: var(--dh-text);
   position: relative;
 }
 
 .logoContainer {
   position: absolute;
-  top: 2rem;
-  left: 3rem;
+  top: 24px;
+  left: 24px;
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
 .logo {
-  width: 10vw;
-  height: 10vw;
-  position: relative;
-  top: -57px;
-  left: -32px;
+  width: clamp(84px, 9vw, 120px);
+  height: clamp(84px, 9vw, 120px);
+  object-fit: contain;
   border-radius: 8px;
 }
 
@@ -54,7 +57,7 @@
 }
 
 .subtitle {
-  color: #9ca3af;
+  color: var(--dh-muted);
   margin-bottom: 3rem;
   display: flex;
   align-items: center;
@@ -62,7 +65,7 @@
 
   &::before {
     content: '✓';
-    color: #10b981;
+    color: var(--dh-accent-gold);
     font-weight: bold;
   }
 }
@@ -82,12 +85,12 @@
 .featureIcon {
   width: 40px;
   height: 40px;
-  background: #ffcc00;
+  background: var(--dh-accent-gold);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1a1a1a;
+  color: #101018;
   font-size: 1.2rem;
   flex-shrink: 0;
 }
@@ -97,11 +100,11 @@
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: white;
+    color: var(--dh-text);
   }
 
   p {
-    color: #9ca3af;
+    color: var(--dh-muted);
     line-height: 1.5;
     font-size: 0.9rem;
   }
@@ -110,8 +113,12 @@
 /* Right Side - Login Form */
 .rightSide {
   flex: 1;
-  background: #2a2a2a;
-  padding: 3rem;
+  background: var(--dh-panel);
+  border: 1px solid var(--dh-border);
+  backdrop-filter: var(--dh-blur);
+  box-shadow: var(--dh-shadow-soft);
+  border-radius: 18px;
+  padding: clamp(20px, 3.5vw, 48px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,8 +127,8 @@
 .loginCard {
   width: 100%;
   max-width: 400px;
-  background: #2a2a2a;
-  color: white;
+  background: transparent;
+  color: var(--dh-text);
 }
 
 .socialLogin {
@@ -129,7 +136,7 @@
 }
 
 .registerText {
-  color: #9ca3af;
+  color: var(--dh-muted);
   margin-bottom: 1rem;
   font-size: 0.9rem;
 }
@@ -142,11 +149,11 @@
 
 .socialButton {
   flex: 1;
-  background: #3a3a3a;
-  border: 1px solid #4a4a4a;
+  background: var(--dh-panel-2);
+  border: 1px solid var(--dh-border);
   border-radius: 8px;
   padding: 0.75rem;
-  color: #e5e5e5;
+  color: var(--dh-text);
   font-size: 0.85rem;
   cursor: pointer;
   display: flex;
@@ -156,8 +163,8 @@
   transition: all 0.2s ease;
 
   &:hover {
-    background: #4a4a4a;
-    border-color: #5a5a5a;
+    background: rgba(255, 204, 0, 0.08);
+    border-color: rgba(255, 204, 0, 0.35);
   }
 
   i {
@@ -177,13 +184,13 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: #4a4a4a;
+    background: var(--dh-border);
   }
 
   span {
-    background: #2a2a2a;
+    background: transparent;
     padding: 0 1rem;
-    color: #9ca3af;
+    color: var(--dh-muted);
     font-size: 0.85rem;
     position: relative;
     z-index: 1;
@@ -202,22 +209,22 @@
 
 .input {
   width: 100%;
-  background: #3a3a3a;
-  border: 1px solid #4a4a4a;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid var(--dh-border);
   border-radius: 8px;
   padding: 0.875rem 2.5rem 0.875rem 1rem;
-  color: white;
+  color: var(--dh-text);
   font-size: 0.9rem;
   transition: all 0.2s ease;
 
   &::placeholder {
-    color: #9ca3af;
+    color: rgba(255, 255, 255, 0.55);
   }
 
   &:focus {
     outline: none;
-    border-color: #ffcc00;
-    box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.1);
+    border-color: rgba(255, 204, 0, 0.55);
+    box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.14);
   }
 
   &.error {
@@ -230,7 +237,7 @@
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #9ca3af;
+  color: rgba(255, 255, 255, 0.55);
   font-size: 0.9rem;
 }
 
@@ -241,25 +248,25 @@
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #9ca3af;
+  color: rgba(255, 255, 255, 0.55);
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 4px;
 
   &:hover {
-    color: #e5e5e5;
+    color: var(--dh-text);
   }
 }
 
 .passwordHint {
-  color: #9ca3af;
+  color: var(--dh-muted);
   font-size: 0.8rem;
   margin-top: 0.5rem;
 }
 
 .loginButton {
-  background: #ffcc00;
-  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--dh-accent-gold) 0%, var(--dh-accent-gold-2) 100%);
+  color: #101018;
   border: none;
   border-radius: 8px;
   padding: 0.875rem;
@@ -268,9 +275,11 @@
   cursor: pointer;
   margin-top: 0.5rem;
   transition: all 0.2s ease;
+  box-shadow: var(--dh-shadow-gold);
 
   &:hover:not(:disabled) {
-    background: #e6b800;
+    filter: brightness(1.04);
+    box-shadow: 0 20px 40px rgba(255, 204, 0, 0.24);
   }
 
   &:disabled {
@@ -282,7 +291,7 @@
 .spinner {
   width: 20px;
   height: 20px;
-  border: 2px solid #1a1a1a;
+  border: 2px solid rgba(16, 16, 24, 0.65);
   border-top: 2px solid transparent;
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -295,7 +304,7 @@
 }
 
 .termsText {
-  color: #9ca3af;
+  color: var(--dh-muted);
   font-size: 0.8rem;
   line-height: 1.4;
   margin-top: 1rem;
@@ -303,13 +312,13 @@
 
 .signupText {
   text-align: center;
-  color: #9ca3af;
+  color: var(--dh-muted);
   font-size: 0.9rem;
   margin-top: 1.5rem;
 }
 
 .signupLink {
-  color: #ffcc00;
+  color: var(--dh-accent-gold);
   text-decoration: none;
 
   &:hover {
@@ -327,6 +336,8 @@
 @media (max-width: 768px) {
   .loginContainer {
     flex-direction: column;
+    gap: 0;
+    padding: var(--dh-nav-offset) 16px 24px;
   }
 
   .leftSide {
@@ -334,6 +345,7 @@
   }
 
   .rightSide {
-    padding: 2rem 1rem;
+    padding: 24px 16px;
+    border-radius: 18px;
   }
 }

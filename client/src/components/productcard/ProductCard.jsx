@@ -1,7 +1,7 @@
 import styles from './ProductCard.module.scss';
 
 const ProductCard = ({ product, onClick }) => {
-    const { id, title, price, image, availability, gender, originalPrice } = product;
+	    const { title, price, image, availability, gender, originalPrice } = product;
 
     const isOnSale = originalPrice && originalPrice > price;
     const discountPercentage = isOnSale ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;

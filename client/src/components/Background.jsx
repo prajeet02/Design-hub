@@ -16,7 +16,8 @@ const Background = () => {
   const particlesOptions = {
     background: {
       color: {
-        value: "#1a1a1a",
+				// Use global page gradient; keep particles canvas transparent
+				value: "transparent",
       },
     },
     fpsLimit: 60,
@@ -88,6 +89,8 @@ const Background = () => {
       detectRetina: true,
     },
   };
+
+	if (!init) return null;
 
   return (
     <div

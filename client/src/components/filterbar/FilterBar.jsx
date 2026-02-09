@@ -48,8 +48,8 @@ const FilterBar = ({ filters, onFilterChange, onClearFilters, isOpen, onClose })
             {/* Gender Filter */}
             <div className={styles.filterSection}>
                 <h4>Gender</h4>
-                <div className={styles.checkboxGroup}>
-                    {['Men', 'Women', 'Unisex'].map(gender => (
+				<div className={styles.checkboxGroup}>
+					{["Female", "Male", "Other"].map((gender) => (
                         <label key={gender} className={styles.checkboxLabel}>
                             <input
                                 type="checkbox"

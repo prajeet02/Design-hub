@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: true,
+      default: "",
     },
     lastName: {
       type: String,
@@ -15,9 +15,15 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    // password is optional until the user completes registration
     password: {
       type: String,
-      required: true,
+      default: "",
+    },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
     },
     verificationCode: {
       type: String,
@@ -37,8 +43,17 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
 );
+
+// Convenience flag derived from role.
+userSchema.virtual("isAdmin").get(function () {
+  return this.role === "admin";
+});
 
 const User = mongoose.model("User", userSchema);
 

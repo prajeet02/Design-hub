@@ -70,7 +70,7 @@ const Login = () => {
 
       // Redirect to home page
       navigate('/home');
-    } catch (error) {
+	    } catch {
       setErrors({ general: "An error occurred. Please try again." });
     } finally {
       setIsLoading(false);

@@ -4,17 +4,20 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 2000;
   padding: 20px;
   animation: fadeIn 0.3s ease;
 }
 
 .modal {
-  background: #1a1a1a;
+  background: var(--dh-panel);
+  border: 1px solid var(--dh-border);
+  backdrop-filter: var(--dh-blur);
   border-radius: 16px;
   max-width: 600px;
   width: 100%;
@@ -22,14 +25,23 @@
   overflow-y: auto;
   position: relative;
   animation: slideUp 0.3s ease;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  box-shadow: var(--dh-shadow);
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 204, 0, 0.20);
+    border-radius: 999px;
+  }
 
   .closeButton {
     position: absolute;
     top: 16px;
     right: 16px;
-    background: rgba(0, 0, 0, 0.6);
-    border: none;
+    background: rgba(0, 0, 0, 0.35);
+	    border: 1px solid var(--dh-border);
     border-radius: 50%;
     width: 36px;
     height: 36px;
@@ -41,12 +53,13 @@
     transition: all 0.2s ease;
 
     &:hover {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(255, 204, 0, 0.10);
+      border-color: rgba(255, 204, 0, 0.40);
       transform: scale(1.1);
     }
 
     svg {
-      color: #ffffff;
+      color: var(--dh-text);
     }
   }
 
@@ -74,12 +87,13 @@
         position: absolute;
         top: 16px;
         left: 16px;
-        background: #ff3e81;
+        background: linear-gradient(135deg, var(--dh-accent-pink) 0%, var(--dh-accent-pink-2) 100%);
         color: white;
         padding: 6px 12px;
         border-radius: 16px;
         font-weight: 600;
         font-size: 12px;
+        box-shadow: 0 14px 28px rgba(255, 62, 129, 0.18);
       }
     }
 
@@ -93,7 +107,7 @@
         width: 80px;
         height: 80px;
         border-radius: 50%;
-        border: 4px solid #1a1a1a;
+        border: 4px solid rgba(0, 0, 0, 0.40);
         overflow: hidden;
         margin-bottom: 12px;
 
@@ -109,8 +123,8 @@
           right: 4px;
           width: 16px;
           height: 16px;
-          background: #22c55e;
-          border: 2px solid #1a1a1a;
+	          background: var(--dh-ok);
+          border: 2px solid rgba(0, 0, 0, 0.40);
           border-radius: 50%;
         }
       }
@@ -119,7 +133,7 @@
         .modelName {
           font-size: 24px;
           font-weight: 700;
-          color: #ffffff;
+          color: var(--dh-text);
           margin: 0 0 4px 0;
           display: flex;
           align-items: center;
@@ -127,8 +141,8 @@
 
           &::after {
             content: '✓';
-            background: #1d9bf0;
-            color: white;
+            background: linear-gradient(135deg, var(--dh-accent-gold) 0%, var(--dh-accent-gold-2) 100%);
+            color: #101018;
             font-size: 12px;
             width: 20px;
             height: 20px;
@@ -146,7 +160,7 @@
           margin-bottom: 16px;
 
           .username {
-            color: #888;
+            color: var(--dh-muted);
             font-size: 14px;
           }
 
@@ -155,11 +169,11 @@
             font-weight: 500;
 
             &.available {
-              color: #22c55e;
+              color: var(--dh-ok);
             }
 
             &.booked {
-              color: #ef4444;
+	              color: var(--dh-danger);
             }
           }
         }
@@ -176,12 +190,12 @@
             .statNumber {
               font-size: 18px;
               font-weight: 700;
-              color: #ffffff;
+              color: var(--dh-text);
             }
 
             .statLabel {
               font-size: 11px;
-              color: #888;
+              color: var(--dh-muted);
               font-weight: 500;
             }
           }
@@ -195,7 +209,7 @@
 
     .tagline {
       font-size: 16px;
-      color: #ffffff;
+      color: var(--dh-text);
       margin: 0 0 12px 0;
       font-weight: 500;
     }
@@ -204,7 +218,7 @@
       margin-bottom: 16px;
 
       .subscribeText {
-        color: #ff3e81;
+        color: var(--dh-accent-gold);
         font-size: 14px;
         font-weight: 600;
         display: block;
@@ -219,19 +233,19 @@
         .currentPrice {
           font-size: 18px;
           font-weight: 700;
-          color: #ffffff;
+          color: var(--dh-accent-gold);
         }
 
         .originalPrice {
           font-size: 14px;
-          color: #888;
+          color: var(--dh-muted);
           text-decoration: line-through;
         }
       }
     }
 
     .description {
-      color: #cccccc;
+      color: rgba(255, 255, 255, 0.78);
       line-height: 1.5;
       margin: 0 0 16px 0;
       font-size: 14px;
@@ -241,7 +255,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      color: #888;
+      color: var(--dh-muted);
       font-size: 14px;
 
       svg {
@@ -256,8 +270,9 @@
 
     .subscribeButton {
       width: 100%;
-      background: #00d4ff;
-      color: white;
+      background: linear-gradient(135deg, var(--dh-accent-gold) 0%, var(--dh-accent-gold-2) 100%);
+      color: #101018;
+      box-shadow: var(--dh-shadow-gold);
       border: none;
       padding: 12px 24px;
       border-radius: 24px;
@@ -267,30 +282,31 @@
       transition: all 0.3s ease;
       text-transform: uppercase;
       &:hover:not(:disabled) {
-        background: #00b8e6;
+        filter: brightness(1.04);
         transform: translateY(-1px);
       }
 
       &:disabled {
-        background: #666;
+        background: rgba(255, 255, 255, 0.10);
+        color: rgba(255, 255, 255, 0.55);
         cursor: not-allowed;
       }
     }
   }
 
   .tabsSection {
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--dh-border);
 
     .tabs {
       display: flex;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid var(--dh-border);
 
       .tab {
         flex: 1;
         background: none;
         border: none;
         padding: 16px;
-        color: #888;
+        color: var(--dh-muted);
         font-size: 14px;
         font-weight: 600;
         cursor: pointer;
@@ -298,17 +314,18 @@
         border-bottom: 2px solid transparent;
 
         .tabCount {
-          color: #ffffff;
+          color: var(--dh-text);
           font-weight: 700;
         }
 
         &.active {
-          color: #ffffff;
-          border-bottom-color: #ffffff;
+          color: var(--dh-text);
+          border-bottom-color: rgba(255, 204, 0, 0.70);
         }
 
         &:hover {
-          color: #ffffff;
+          color: var(--dh-text);
+          background: rgba(255, 204, 0, 0.06);
         }
       }
     }
