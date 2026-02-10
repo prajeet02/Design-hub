@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './footer.module.scss';
+import styles from './Footer.module.scss';
 import DesireHubLogo from '../../assets/images/Desirehublogo.png';
 
 const Footer = () => {
