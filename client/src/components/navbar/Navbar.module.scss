@@ -89,8 +89,8 @@
 .logo {
   transition: width 0.3s, height 0.3s;
   /* Keep the logo inside the fixed navbar height (prevents overlap with page content) */
-  width: clamp(72px, 9.5vh, 140px);
-  height: clamp(72px, 9.5vh, 140px);
+  width: clamp(72px, 9.8vh, 150px);
+  height: clamp(72px, 9.8vh, 150px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,8 +98,8 @@
 
   &.shrink {
     /* Keep logo size consistent (no shrinking on scroll) */
-    width: clamp(72px, 9.5vh, 140px);
-    height: clamp(72px, 9.5vh, 140px);
+    width: clamp(154px, 9.8vh, 150px);
+    height: clamp(91px, 9.8vh, 150px);
   }
 
   &.shrink img {
@@ -149,12 +149,12 @@
   }
 
   .logo {
-    width: clamp(56px, 6vh, 92px);
-    height: clamp(56px, 6vh, 92px);
+    width: clamp(56px, 6vh, 100px);
+    height: clamp(56px, 6vh, 100px);
 
     &.shrink {
-      width: clamp(56px, 6vh, 92px);
-      height: clamp(56px, 6vh, 92px);
+      width: clamp(56px, 6vh, 100px);
+      height: clamp(56px, 6vh, 100px);
     }
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Footer.module.scss';
-import DesireHubLogo from '../../assets/images/Desirehublogo.png';
+import DesireLogo from '../../assets/Desire.png';
 
 const Footer = () => {
     return (
@@ -9,8 +9,7 @@ const Footer = () => {
                 {/* Company Info Section */}
                 <div className={styles.footer__section}>
                     <div className={styles.footer__logo}>
-                        <img src={DesireHubLogo} alt="DesireHub Logo" />
-                        <h3>DesireHub</h3>
+                        <img src={DesireLogo} alt="DesireHub Logo" />
                     </div>
                     <p className={styles.footer__description}>
                         Your premier destination for exclusive content and premium experiences.

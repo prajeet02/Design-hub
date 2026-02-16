@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import styles from "./Navbar.module.scss";
-import DesireHubLogo from "../../assets/images/Desirehublogo.png";
+import DesireLogo from "../../assets/Desire.png";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,7 +37,7 @@ const Navbar = () => {
             <div
               className={`${styles.logo}${isScrolled ? ` ${styles.shrink}` : ""}`}
             >
-              <img src={DesireHubLogo} alt="Logo" />
+              <img src={DesireLogo} alt="DesireHub Logo" />
             </div>
             <div className={styles["logo-text"]}>
               <span className={styles.brand}></span>
