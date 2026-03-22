@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import styles from "./Login.module.scss";
+import AgeGateModal from "../../components/ageGate/AgeGateModal";
+import { isAgeVerified, setAgeVerified } from "../../components/ageGate/ageGateStorage";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [isAgeGateOpen, setIsAgeGateOpen] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -12,6 +15,10 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (!isAgeVerified()) setIsAgeGateOpen(true);
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -50,6 +57,11 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!isAgeVerified()) {
+      setIsAgeGateOpen(true);
+      return;
+    }
 
     if (!validateForm()) {
       return;
@@ -221,6 +233,19 @@ const Login = () => {
           </form>
         </div>
       </div>
+
+      <AgeGateModal
+        open={isAgeGateOpen}
+        minAge={18}
+        onConfirm={() => {
+          setAgeVerified();
+          setIsAgeGateOpen(false);
+        }}
+        onExit={() => {
+          // keep it simple/safe: navigate away from login if user is underage
+          navigate("/aboutus", { replace: true });
+        }}
+      />
     </div>
   );
 };

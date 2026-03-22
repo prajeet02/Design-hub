@@ -141,7 +141,8 @@ const ProductsPage = () => {
   const [filters, setFilters] = useState({
     gender: [],
     priceRange: [0, 1000],
-    availability: "All",
+	    availability: "All",
+	    searchQuery: "",
   });
 
 	const [allProducts, setAllProducts] = useState(dummyProducts);
@@ -164,7 +165,8 @@ const ProductsPage = () => {
     setFilters({
       gender: [],
       priceRange: [0, 1000],
-      availability: "All",
+	      availability: "All",
+	      searchQuery: "",
     });
   };
 
@@ -216,6 +218,15 @@ const ProductsPage = () => {
 
 	const filteredProducts = useMemo(() => {
 		return allProducts.filter((product) => {
+	      // Search filter (by name/title)
+	      const q = String(filters.searchQuery || "")
+	        .trim()
+	        .toLowerCase();
+	      if (q) {
+	        const name = String(product?.title || "").toLowerCase();
+	        if (!name.includes(q)) return false;
+	      }
+
       // Gender filter
       if (
         filters.gender.length > 0 &&

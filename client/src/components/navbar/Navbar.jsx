@@ -30,7 +30,7 @@ const Navbar = () => {
           }`}
         >
           <a href="/performers">PERFORMERS PAGE</a>
-          <Link to="/">LOGIN</Link>
+					<Link to="/login">LOGIN</Link>
         </div>
         <div className={`${styles.navbar__section} ${styles.navbar__center}`}>
           <Link to="/home">

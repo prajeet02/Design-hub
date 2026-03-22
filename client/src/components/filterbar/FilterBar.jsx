@@ -45,6 +45,19 @@ const FilterBar = ({ filters, onFilterChange, onClearFilters, isOpen, onClose })
                 </div>
             </div>
 
+			{/* Search */}
+			<div className={styles.filterSection}>
+				<h4>Search</h4>
+				<input
+					type="text"
+					value={filters.searchQuery || ''}
+					onChange={(e) => onFilterChange('searchQuery', e.target.value)}
+					placeholder="Search creators by name"
+					className={styles.searchInput}
+					aria-label="Search creators by name"
+				/>
+			</div>
+
             {/* Gender Filter */}
             <div className={styles.filterSection}>
                 <h4>Gender</h4>

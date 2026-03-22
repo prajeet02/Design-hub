@@ -3,15 +3,22 @@ import Performer from "../models/performer.js";
 
 const router = express.Router();
 
+const escapeRegex = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 // Public: list models/performers
 // GET /api/v1/models
 router.get("/", async (req, res) => {
   try {
-    const { availability, gender } = req.query;
+	  const { availability, gender, q } = req.query;
 
     const filter = { isActive: true };
     if (availability && availability !== "All") filter.availability = availability;
     if (gender) filter.gender = gender;
+
+	  const qStr = typeof q === "string" ? q.trim() : "";
+	  if (qStr) {
+		  filter.title = { $regex: escapeRegex(qStr), $options: "i" };
+	  }
 
     const models = await Performer.find(filter).sort({ createdAt: -1 });
 

@@ -17,9 +17,12 @@ app.use(express.json({ limit: "10mb" }));
 
 // Minimal CORS (so the Vite dev server can call this API)
 app.use((req, res, next) => {
+  const corsOrigin = String(process.env.CORS_ORIGIN || "*")
+    .trim()
+    .replace(/;$/, "");
   res.header(
     "Access-Control-Allow-Origin",
-    process.env.CORS_ORIGIN || "*"
+    corsOrigin
   );
   res.header(
     "Access-Control-Allow-Headers",
@@ -39,7 +42,7 @@ app.use("/api/v1/models", modelRoutes);
 
 connectDB();
 
-const PORT = process.env.PORT || 7777;
+const PORT = process.env.PORT || 5555;
 
 app.listen(PORT, () => {
   console.log(`server is listening to requests on port ${PORT}...`);
